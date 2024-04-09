@@ -35,11 +35,11 @@ const [inputSearchData, setInputSearchData] = useState()
         </IconButton>
         </Box>
         <Box zIndex={'2'} top={'-3px'} right={'0px'}  position={'absolute'}>
-        <IconButton>
+        <IconButton >
           <MicIcon/>
         </IconButton>
         </Box>
-        <Input placeholder="Search here" inputProps={{style:{textAlign:'center'}}} disableUnderline fullWidth onChange={(event) => setInputSearchData(event.target.value)}/>
+        <Input onKeyDown={(event) => event.key == 'Enter' ? makeQuery() : null} placeholder="Search here" inputProps={{style:{textAlign:'center'}}} disableUnderline fullWidth onChange={(event) => setInputSearchData(event.target.value)}/>
       </Box>
       </>
         

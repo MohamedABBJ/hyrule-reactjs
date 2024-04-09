@@ -6,6 +6,8 @@ import ObtainedSearchedData from "../components/responsecontent/obtainedSearched
 import zIndex from "@mui/material/styles/zIndex"
 
 const HomeScreen = () =>{
+    
+
     const [dataGetted, setDataGetted] = useState({
         id:0,
         name:'',
