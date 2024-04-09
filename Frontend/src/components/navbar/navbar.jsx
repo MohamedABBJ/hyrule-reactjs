@@ -5,8 +5,8 @@ const NavBar = () =>{
     return(
         <>
     
-
-           <Button>LOGO</Button>
+        {/* Work in progress */}
+        <Button>LOGO</Button>
         <Button>Items</Button>
         <Button>Enemies</Button>
         <Button>Map</Button>
