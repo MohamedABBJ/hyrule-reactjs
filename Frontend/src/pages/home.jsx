@@ -15,6 +15,16 @@ const HomeScreen = () =>{
         image:'',
         state:false
     })
+
+    const defaultState = {
+        id:0,
+        name:'',
+        category:'',
+        description:'',
+        drops:[],
+        image:'',
+        state:false
+    }
     
     return(
         //Page Content
@@ -30,7 +40,7 @@ const HomeScreen = () =>{
             </Box>
             {/* Data Obtained Window */}
             <Box height={'91vh'} border={'solid black'} display={dataGetted.state ? 'flex' : 'none'} justifyContent={'center'} alignItems={'center'}>
-            <ObtainedSearchedData  data={{setDataGetted, dataGetted}}/>
+            <ObtainedSearchedData  data={{setDataGetted, dataGetted, defaultState}}/>
             </Box>
 
         </Box>

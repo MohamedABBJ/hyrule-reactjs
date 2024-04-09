@@ -9,7 +9,7 @@ const [inputSearchData, setInputSearchData] = useState()
 
     const makeQuery = async() =>{
       try {
-        const response = await axios.get(`https://botw-compendium.herokuapp.com/api/v3/compendium/entry/` +'moblin')
+        const response = await axios.get(`https://botw-compendium.herokuapp.com/api/v3/compendium/entry/` + inputSearchData)
         const objectData = response.data.data
         prop.setDataGetted({
           id:objectData.id,
