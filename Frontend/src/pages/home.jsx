@@ -4,10 +4,9 @@ import NavBar from "../components/navbar/navbar"
 import SearchBar from "../components/searchbar/searchbar"
 import ObtainedSearchedData from "../components/responsecontent/obtainedSearchedData"
 import zIndex from "@mui/material/styles/zIndex"
+import useRequestAll from "../components/hooks/useRequestAll"
 
 const HomeScreen = () =>{
-    
-
     const [dataGetted, setDataGetted] = useState({
         id:0,
         name:'',
