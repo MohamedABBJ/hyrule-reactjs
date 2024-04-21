@@ -1,11 +1,23 @@
-import { Box, Button, Icon, IconButton, Input, TextField } from "@mui/material"
+import { Autocomplete, Box, Button, Icon, IconButton, Input, TextField } from "@mui/material"
 import axios from "axios"
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react"
 import SearchIcon from '@mui/icons-material/Search';
 import MicIcon from '@mui/icons-material/Mic';
+import useRequestAll from "../hooks/useRequestAll";
+import { useRequestOne } from "../hooks/useRequestOne";
 
 const SearchBar = (prop) =>{
 const [inputSearchData, setInputSearchData] = useState()
+const {data,loading} = useRequestAll()
+const allData = loading ? null : data.data.map((element) => element.name) 
+
+    const {
+      dataObtained,
+      makeQueryd} = useRequestOne()
+
+      useEffect(() => {
+        makeQueryd('moblin')
+      }, [])
 
     const makeQuery = async() =>{
       try {
@@ -35,11 +47,19 @@ const [inputSearchData, setInputSearchData] = useState()
         </IconButton>
         </Box>
         <Box zIndex={'2'} top={'-3px'} right={'0px'}  position={'absolute'}>
-        <IconButton>
+        <IconButton >
           <MicIcon/>
         </IconButton>
         </Box>
-        <Input placeholder="Search here" inputProps={{style:{textAlign:'center'}}} disableUnderline fullWidth onChange={(event) => setInputSearchData(event.target.value)}/>
+        <Autocomplete
+        onChange={(e) => setInputSearchData(e.target.innerHTML)}
+        id="free-solo-demo"
+        freeSolo
+        options={allData}
+        renderInput={(params) => <TextField onKeyDown={(event) => event.key == 'Enter' ?  makeQuery() : null} onChange={(event) => setInputSearchData(event.target.value)} {...params} label="freeSolo" />}
+      />
+        
+        <Input onKeyDown={(event) => event.key == 'Enter' ? console.log(event.target.value) : null} placeholder="Search here" inputProps={{style:{textAlign:'center'}}} disableUnderline fullWidth/>
       </Box>
       </>
         

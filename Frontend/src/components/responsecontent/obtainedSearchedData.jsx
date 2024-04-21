@@ -3,8 +3,7 @@ import React, { Dispatch } from "react"
 
 
 const ObtainedSearchedData = ({data}) =>{
-    
-
+    console.log(data.dataGetted)
     return(
         <>
         {/* Outer Content */}
