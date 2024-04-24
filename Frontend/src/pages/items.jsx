@@ -3,16 +3,15 @@ import NavBar from "../components/navbar/navbar"
 import { Reorder, Search, StarBorder, ViewModule } from "@mui/icons-material"
 import useRequestAll from "../components/hooks/useRequestAll"
 import { ItemBoxes } from "../components/ItemBoxes/itemboxes"
-import { useState } from "react"
+import { useRef, useState } from "react"
 
 export const ItemsPage = () =>{
     const requestAll = useRequestAll()
     const [searchValue, setSearchValue] = useState('')
-    const [countGettedValues, setCountGettedValues] = useState('')
-    
-    
+    let test = 1
+    //Tried to test if I can sum more values to test didn't work because is a constant an array doing (1+1) = 222222... will try to make it with the key returns undefined but going to investigate more on that!
     //Will do this now, items found should say the items that went located in the search you can do this with passing setCountGettedValues to the component itemboxes!
-
+    console.log(test)
     return(
         <>
         {/* Top Bar Search */}
@@ -36,7 +35,7 @@ export const ItemsPage = () =>{
 
             {/* Items Blocks */}
             <Box padding={'10px'}  position={'relative'} border={'solid'} marginTop={'20px'} display={'flex'} flexWrap={'wrap'}>
-            {requestAll.data.data?.map((element) =>  searchValue != '' ? element.name.includes(searchValue) ? (<ItemBoxes {...element}/>) : '' : <ItemBoxes {...element}/>)}
+            {requestAll.data.data?.map((element) =>  searchValue != '' ? element.name.includes(searchValue) ? (<ItemBoxes {...element}/>, setCountGettedValues(countGettedValues+1)) : '' : ((<ItemBoxes {...{element}} key={element.id}/>)))}
             </Box>
         </Box>
         </>
