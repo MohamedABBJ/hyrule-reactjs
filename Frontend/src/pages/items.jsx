@@ -3,15 +3,36 @@ import NavBar from "../components/navbar/navbar"
 import { Reorder, Search, StarBorder, ViewModule } from "@mui/icons-material"
 import useRequestAll from "../components/hooks/useRequestAll"
 import { ItemBoxes } from "../components/ItemBoxes/itemboxes"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export const ItemsPage = () =>{
     const requestAll = useRequestAll()
     const [searchValue, setSearchValue] = useState('')
-    let test = 1
-    //Tried to test if I can sum more values to test didn't work because is a constant an array doing (1+1) = 222222... will try to make it with the key returns undefined but going to investigate more on that!
-    //Will do this now, items found should say the items that went located in the search you can do this with passing setCountGettedValues to the component itemboxes!
-    console.log(test)
+    const [gettedValues, setGettedValues] = useState({})
+    const obtainedValues = useRef()
+
+    let test = 0
+      
+    const allValues = () =>{
+     obtainedValues.current = requestAll.data.data && requestAll.data.data.length
+        return(
+            requestAll.data.data?.map((element) => (<ItemBoxes {...{element}}  key={element.id}/>))
+        )
+    }
+
+    const searchValueFun = () =>{
+        const valueSearched = requestAll.data.data?.filter((element) => element.name.includes(searchValue))
+        obtainedValues.current = valueSearched.length
+        return(
+            valueSearched.map((element)  => (<ItemBoxes {...{element}}  key={element.id}/>))
+        )
+    }
+
+    
+        
+
+    
+
     return(
         <>
         {/* Top Bar Search */}
@@ -19,7 +40,7 @@ export const ItemsPage = () =>{
         <Box marginTop={'10px'} display={'flex'} flexDirection={'row'}>
         <Box  width={'70px'} textAlign={'center'}>
         <Typography>Items</Typography>
-        <Typography>*** found</Typography>
+        <Typography>{`${obtainedValues.current} Found`}</Typography>
         </Box>
         <Box position={'relative'} marginLeft={'40px'} width={'80%'}  >
             <Search sx={{position:'absolute', marginLeft:'10px', height:'80%'}} />
@@ -35,7 +56,7 @@ export const ItemsPage = () =>{
 
             {/* Items Blocks */}
             <Box padding={'10px'}  position={'relative'} border={'solid'} marginTop={'20px'} display={'flex'} flexWrap={'wrap'}>
-            {requestAll.data.data?.map((element) =>  searchValue != '' ? element.name.includes(searchValue) ? (<ItemBoxes {...element}/>, setCountGettedValues(countGettedValues+1)) : '' : ((<ItemBoxes {...{element}} key={element.id}/>)))}
+           {searchValue == '' ? allValues() : searchValueFun()}
             </Box>
         </Box>
         </>

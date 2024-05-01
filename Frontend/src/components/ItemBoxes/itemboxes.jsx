@@ -3,7 +3,7 @@ import { Box, Button, Typography } from "@mui/material"
 import { useEffect } from "react"
 
 export const ItemBoxes = (props) =>{
-    console.log(props)
+
     const allTagOptions = () =>{
         if(props.element.category == 'monsters'){
             return 'red'
