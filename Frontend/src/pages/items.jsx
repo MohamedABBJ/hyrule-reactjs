@@ -4,30 +4,36 @@ import { Reorder, Search, StarBorder, ViewModule } from "@mui/icons-material"
 import useRequestAll from "../components/hooks/useRequestAll"
 import { ItemBoxes } from "../components/ItemBoxes/itemboxes"
 import { useEffect, useRef, useState } from "react"
+import { useParams } from "react-router-dom"
+import { usePageQuantity } from "../components/hooks/usePageQuantity"
 
 
 export const ItemsPage = () =>{
+    const params = useParams()
     const requestAll = useRequestAll()
     const [searchValue, setSearchValue] = useState('')
-    const [gettedValues, setGettedValues] = useState({})
+    const pageQuantity = usePageQuantity()
     const obtainedValues = useRef()
 
-    let test = 0
-      
     const allValues = () =>{
      obtainedValues.current = requestAll.data.data && requestAll.data.data.length
+     if(obtainedValues.current && obtainedValues.current > 50){
+        pageQuantity.arrayOfElements.current = requestAll.data.data
+     }
         return(
-            requestAll.data.data?.map((element) => element.category != 'monsters' ? (<ItemBoxes {...{element}}  key={element.id}/>) : '')
+            requestAll.data.data?.map((element) =>  element.category != 'monsters' ? (<ItemBoxes {...{element}}  key={element.id}/>) : '')
         )
     }
 
     const searchValueFun = () =>{
+        const valueSearched = requestAll.data.data?.filter((element) => element.name.includes(searchValue) && element.category != 'monsters')
         const valueSearched = requestAll.data.data?.filter((element) => element.name.includes(searchValue) && element.category != 'monsters')
         obtainedValues.current = valueSearched.length
         return(
             valueSearched.map((element)  => (<ItemBoxes {...{element}}  key={element.id}/>))
         )
     }
+
 
 
     return(
@@ -55,9 +61,17 @@ export const ItemsPage = () =>{
 
 
             {/* Items Blocks */}
-            <Box padding={'10px'}  position={'relative'} border={'solid'} marginTop={'20px'} display={'flex'} flexWrap={'wrap'}>
+            <Box padding={'10px'} position={'relative'} height={'80vh'} border={'solid'} sx={{overflowY:'scroll'}} marginTop={'20px'} display={'flex'} flexWrap={'wrap'}>
+        <Box display={'flex'} flexWrap={'wrap'}>
            {searchValue == '' ? allValues() : searchValueFun()}
+        </Box>
+           <Box display={'flex'} flexWrap={'wrap'} width={'100%'} border={'solid'} justifyContent={'end'}>
+            <Button variant="contained">{`<`}</Button>
+            <Typography marginTop={'5px'}>{`3`}</Typography>
+            <Button variant="contained">{`>`}</Button>
+           </Box>
             </Box>
+
         </Box>
         </>
     )
