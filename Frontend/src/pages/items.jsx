@@ -5,6 +5,7 @@ import useRequestAll from "../components/hooks/useRequestAll"
 import { ItemBoxes } from "../components/ItemBoxes/itemboxes"
 import { useEffect, useRef, useState } from "react"
 
+
 export const ItemsPage = () =>{
     const requestAll = useRequestAll()
     const [searchValue, setSearchValue] = useState('')
@@ -35,6 +36,9 @@ export const ItemsPage = () =>{
 
     return(
         <>
+   
+        <NavBar props={'side'}/>
+
         {/* Top Bar Search */}
         <Box position={'relative'} sx={{float:'right'}} right={'0'} width={'94%'}  border={'solid'}>
         <Box marginTop={'10px'} display={'flex'} flexDirection={'row'}>
