@@ -17,22 +17,18 @@ export const ItemsPage = () =>{
     const allValues = () =>{
      obtainedValues.current = requestAll.data.data && requestAll.data.data.length
         return(
-            requestAll.data.data?.map((element) => (<ItemBoxes {...{element}}  key={element.id}/>))
+            requestAll.data.data?.map((element) => element.category != 'monsters' ? (<ItemBoxes {...{element}}  key={element.id}/>) : '')
         )
     }
 
     const searchValueFun = () =>{
-        const valueSearched = requestAll.data.data?.filter((element) => element.name.includes(searchValue))
+        const valueSearched = requestAll.data.data?.filter((element) => element.name.includes(searchValue) && element.category != 'monsters')
         obtainedValues.current = valueSearched.length
         return(
             valueSearched.map((element)  => (<ItemBoxes {...{element}}  key={element.id}/>))
         )
     }
 
-    
-        
-
-    
 
     return(
         <>
