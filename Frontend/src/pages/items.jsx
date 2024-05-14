@@ -1,4 +1,4 @@
-import { Box, Button, Input, TextField, Typography } from "@mui/material"
+import { Box, Button, IconButton, Input, TextField, Typography } from "@mui/material"
 import NavBar from "../components/navbar/navbar"
 import { Reorder, Search, StarBorder, ViewModule } from "@mui/icons-material"
 import useRequestAll from "../components/hooks/useRequestAll"
@@ -6,6 +6,7 @@ import { ItemBoxes } from "../components/ItemBoxes/itemboxes"
 import { useEffect, useRef, useState } from "react"
 import { useParams } from "react-router-dom"
 import { usePageQuantity } from "../components/hooks/usePageQuantity"
+import useBoxesView from "../components/hooks/useBoxesView"
 
 
 export const ItemsPage = () =>{
@@ -14,6 +15,7 @@ export const ItemsPage = () =>{
     const [searchValue, setSearchValue] = useState('')
     const pageQuantity = usePageQuantity()
     const obtainedValues = useRef()
+    const {setViewSelector, viewType} = useBoxesView()
 
     const allValues = () =>{
      obtainedValues.current = requestAll.data.data && requestAll.data.data.length
@@ -27,14 +29,11 @@ export const ItemsPage = () =>{
 
     const searchValueFun = () =>{
         const valueSearched = requestAll.data.data?.filter((element) => element.name.includes(searchValue) && element.category != 'monsters')
-        const valueSearched = requestAll.data.data?.filter((element) => element.name.includes(searchValue) && element.category != 'monsters')
         obtainedValues.current = valueSearched.length
         return(
             valueSearched.map((element)  => (<ItemBoxes {...{element}}  key={element.id}/>))
         )
     }
-
-
 
     return(
         <>
@@ -54,15 +53,15 @@ export const ItemsPage = () =>{
         </Input>
         </Box>
         <Box marginLeft={'40px'}>
-        <Reorder fontSize="large"/>
-        <ViewModule fontSize="large"/>
+        <IconButton onClick={() => setViewSelector('line')} children={<Reorder fontSize="large"/>}/>
+        <IconButton onClick={() => setViewSelector('square')} children={<ViewModule fontSize="large"/>}/>
         </Box>
         </Box>
 
 
             {/* Items Blocks */}
             <Box padding={'10px'} position={'relative'} height={'80vh'} border={'solid'} sx={{overflowY:'scroll'}} marginTop={'20px'} display={'flex'} flexWrap={'wrap'}>
-        <Box display={'flex'} flexWrap={'wrap'}>
+        <Box display={'flex'} flexWrap={'wrap'} flexDirection={viewType.flexDirection}>
            {searchValue == '' ? allValues() : searchValueFun()}
         </Box>
            <Box display={'flex'} flexWrap={'wrap'} width={'100%'} border={'solid'} justifyContent={'end'}>
