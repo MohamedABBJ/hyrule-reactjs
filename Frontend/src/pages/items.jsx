@@ -23,7 +23,7 @@ export const ItemsPage = () =>{
         pageQuantity.arrayOfElements.current = requestAll.data.data
      }
         return(
-            requestAll.data.data?.map((element) =>  element.category != 'monsters' ? (<ItemBoxes {...{element}}  key={element.id}/>) : '')
+            requestAll.data.data?.map((element) =>  element.category != 'monsters' ? (<ItemBoxes {...{element,viewType}}  key={element.id}/>) : '')
         )
     }
 
@@ -31,10 +31,9 @@ export const ItemsPage = () =>{
         const valueSearched = requestAll.data.data?.filter((element) => element.name.includes(searchValue) && element.category != 'monsters')
         obtainedValues.current = valueSearched.length
         return(
-            valueSearched.map((element)  => (<ItemBoxes {...{element}}  key={element.id}/>))
+            valueSearched.map((element)  => (<ItemBoxes {...{element,viewType}}  key={element.id}/>))
         )
     }
-
     return(
         <>
    

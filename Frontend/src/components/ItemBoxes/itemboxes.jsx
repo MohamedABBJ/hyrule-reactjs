@@ -4,8 +4,7 @@ import { useEffect } from "react"
 import useBoxesView from "../hooks/useBoxesView"
 
 export const ItemBoxes = (props) =>{
-    const {setViewSelector, viewType} = useBoxesView()
-
+    console.log(props)
 
     const allTagOptions = () =>{
         if(props.element.category == 'monsters'){
@@ -25,7 +24,7 @@ export const ItemBoxes = (props) =>{
 
     return(
         <>
-         <Box position={'relative'} border={'solid #ff0000 2px'} borderRadius={'3px'}  marginBottom={'5px'} marginLeft={'5px'} width={'285px'} height={'70px'}>
+         <Box position={'relative'} border={'solid #ff0000 2px'} borderRadius={'3px'}  marginBottom={'5px'} marginLeft={'5px'} width={'285px'} height={props.viewType}>
                 <Box padding={'15px'}>
                 <Box display={'flex'} flexDirection={'row'}>
                  <Box sx={{backgroundColor:allTagOptions()}} marginRight={'5px'} marginTop={'5px'}  height={'10px'} width={'10px'} borderRadius={'600px'}/>
