@@ -7,10 +7,9 @@ const useBoxesView = () =>{
 
     const viewType ={
         flexDirection: squareView ? 'row' : lineView ? 'column' : '',
-        height: squareView ? '200px' : lineView ? '100px' : '',
     }
 
-    return ({setViewSelector, viewType})
+    return ({setViewSelector, viewSelector, viewType})
 }
 
 export default useBoxesView

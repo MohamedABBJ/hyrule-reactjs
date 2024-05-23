@@ -15,15 +15,18 @@ export const ItemsPage = () =>{
     const [searchValue, setSearchValue] = useState('')
     const pageQuantity = usePageQuantity()
     const obtainedValues = useRef()
-    const {setViewSelector, viewType} = useBoxesView()
+    const {setViewSelector,viewSelector, viewType} = useBoxesView()
+    const [itemPages, setItemPages] = useState('1')
 
     const allValues = () =>{
      obtainedValues.current = requestAll.data.data && requestAll.data.data.length
      if(obtainedValues.current && obtainedValues.current > 50){
-        pageQuantity.arrayOfElements.current = requestAll.data.data
+        return(
+            requestAll.data.data?.map((element,index) =>  element.category != 'monsters' ? (<ItemBoxes {...{element,viewSelector}}  key={element.id}/>) : '')
+        )
      }
         return(
-            requestAll.data.data?.map((element) =>  element.category != 'monsters' ? (<ItemBoxes {...{element,viewType}}  key={element.id}/>) : '')
+            requestAll.data.data?.map((element) =>  element.category != 'monsters' ? (<ItemBoxes {...{element,viewSelector}}  key={element.id}/>) : '')
         )
     }
 
@@ -31,7 +34,7 @@ export const ItemsPage = () =>{
         const valueSearched = requestAll.data.data?.filter((element) => element.name.includes(searchValue) && element.category != 'monsters')
         obtainedValues.current = valueSearched.length
         return(
-            valueSearched.map((element)  => (<ItemBoxes {...{element,viewType}}  key={element.id}/>))
+            valueSearched.map((element)  => (<ItemBoxes {...{element,viewSelector}}  key={element.id}/>))
         )
     }
     return(
@@ -59,13 +62,13 @@ export const ItemsPage = () =>{
 
 
             {/* Items Blocks */}
-            <Box padding={'10px'} position={'relative'} height={'80vh'} border={'solid'} sx={{overflowY:'scroll'}} marginTop={'20px'} display={'flex'} flexWrap={'wrap'}>
-        <Box display={'flex'} flexWrap={'wrap'} flexDirection={viewType.flexDirection}>
+            <Box padding={'10px'}  height={'81vh'} width={'98%'} border={'solid'} sx={{overflowY:'scroll'}} marginTop={'20px'} display={'flex'} flexWrap={'wrap'}>
+        <Box width={'100%'} display={'flex'} flexWrap={'wrap'} flexDirection={viewType.flexDirection}>
            {searchValue == '' ? allValues() : searchValueFun()}
         </Box>
            <Box display={'flex'} flexWrap={'wrap'} width={'100%'} border={'solid'} justifyContent={'end'}>
             <Button variant="contained">{`<`}</Button>
-            <Typography marginTop={'5px'}>{`3`}</Typography>
+            <Typography marginTop={'5px'}>{itemPages}</Typography>
             <Button variant="contained">{`>`}</Button>
            </Box>
             </Box>
