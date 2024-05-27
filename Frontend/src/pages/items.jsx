@@ -13,20 +13,32 @@ export const ItemsPage = () =>{
     const params = useParams()
     const requestAll = useRequestAll()
     const [searchValue, setSearchValue] = useState('')
-    const pageQuantity = usePageQuantity()
+
     const obtainedValues = useRef()
     const {setViewSelector,viewSelector, viewType} = useBoxesView()
-    const [itemPages, setItemPages] = useState('1')
+    const [itemPages, setItemPages] = useState(1)
+    const [indexQuantity, setIndexQuantity] = useState(0)
+    const [pageQuantity, setPageQuantity] = useState(50)
+
+    const nextPage = () =>{
+        setItemPages(itemPages + 1)
+        setPageQuantity(pageQuantity + 50)
+        setIndexQuantity(indexQuantity + 50)
+    }
+
+    const previousPage = () =>{
+        if(itemPages > 1){
+            setItemPages(itemPages - 1)
+            setPageQuantity(pageQuantity - 50)
+        }
+    }
 
     const allValues = () =>{
+        console.log(indexQuantity)
      obtainedValues.current = requestAll.data.data && requestAll.data.data.length
-     if(obtainedValues.current && obtainedValues.current > 50){
+     const getItems = requestAll.data.data?.filter((element) => element.category != 'monsters')
         return(
-            requestAll.data.data?.map((element,index) =>  element.category != 'monsters' ? (<ItemBoxes {...{element,viewSelector}}  key={element.id}/>) : '')
-        )
-     }
-        return(
-            requestAll.data.data?.map((element) =>  element.category != 'monsters' ? (<ItemBoxes {...{element,viewSelector}}  key={element.id}/>) : '')
+            getItems?.map((element,index) => index < pageQuantity && index > indexQuantity  ? (<ItemBoxes {...{element,viewSelector}}  key={element.id}/>) : '')
         )
     }
 
@@ -67,9 +79,9 @@ export const ItemsPage = () =>{
            {searchValue == '' ? allValues() : searchValueFun()}
         </Box>
            <Box display={'flex'} flexWrap={'wrap'} width={'100%'} border={'solid'} justifyContent={'end'}>
-            <Button variant="contained">{`<`}</Button>
+            <Button variant="contained" onClick={previousPage}>{`<`}</Button>
             <Typography marginTop={'5px'}>{itemPages}</Typography>
-            <Button variant="contained">{`>`}</Button>
+            <Button variant="contained" onClick={nextPage}>{`>`}</Button>
            </Box>
             </Box>
 
