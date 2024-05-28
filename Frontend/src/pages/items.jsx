@@ -13,13 +13,30 @@ export const ItemsPage = () =>{
     const params = useParams()
     const requestAll = useRequestAll()
     const [searchValue, setSearchValue] = useState('')
-
+    
     const obtainedValues = useRef()
     const {setViewSelector,viewSelector, viewType} = useBoxesView()
     const [itemPages, setItemPages] = useState(1)
+    const [maxPage, setMaxPage] = useState()
     const [indexQuantity, setIndexQuantity] = useState(0)
     const [pageQuantity, setPageQuantity] = useState(50)
+    const [hasMorePages, setHasMorePages] = useState(true)
+    const getItems = requestAll.data.data?.filter((element) => element.category != 'monsters')
+    const valueSearched = requestAll.data.data?.filter((element) => element.name.includes(searchValue) && element.category != 'monsters')
+    
+    
 
+    useEffect(() => {
+        if (searchValue != '') {
+            setItemPages(1)
+            setMaxPage(Math.round(valueSearched?.length / 50) + 1)
+        }else if(getItems){
+            setMaxPage(Math.round(getItems?.length / 50) + 1)
+        }
+    }, [searchValue,getItems])
+
+    
+    console.log(maxPage)
     const nextPage = () =>{
         setItemPages(itemPages + 1)
         setPageQuantity(pageQuantity + 50)
@@ -30,23 +47,26 @@ export const ItemsPage = () =>{
         if(itemPages > 1){
             setItemPages(itemPages - 1)
             setPageQuantity(pageQuantity - 50)
+            setIndexQuantity(indexQuantity - 50)
         }
     }
 
     const allValues = () =>{
-        console.log(indexQuantity)
      obtainedValues.current = requestAll.data.data && requestAll.data.data.length
-     const getItems = requestAll.data.data?.filter((element) => element.category != 'monsters')
         return(
             getItems?.map((element,index) => index < pageQuantity && index > indexQuantity  ? (<ItemBoxes {...{element,viewSelector}}  key={element.id}/>) : '')
         )
     }
 
     const searchValueFun = () =>{
-        const valueSearched = requestAll.data.data?.filter((element) => element.name.includes(searchValue) && element.category != 'monsters')
+        if(pageQuantity != 50 && indexQuantity != 0){
+            setPageQuantity(50)
+            setIndexQuantity(0)
+        }
         obtainedValues.current = valueSearched.length
+
         return(
-            valueSearched.map((element)  => (<ItemBoxes {...{element,viewSelector}}  key={element.id}/>))
+            valueSearched?.map((element,index)  => index < pageQuantity && index >= indexQuantity ? (<ItemBoxes {...{element,viewSelector}}  key={element.id}/>) : '')
         )
     }
     return(
@@ -79,9 +99,9 @@ export const ItemsPage = () =>{
            {searchValue == '' ? allValues() : searchValueFun()}
         </Box>
            <Box display={'flex'} flexWrap={'wrap'} width={'100%'} border={'solid'} justifyContent={'end'}>
-            <Button variant="contained" onClick={previousPage}>{`<`}</Button>
+            <Button variant="contained" onClick={previousPage} disabled={itemPages == 1}>{`<`}</Button>
             <Typography marginTop={'5px'}>{itemPages}</Typography>
-            <Button variant="contained" onClick={nextPage}>{`>`}</Button>
+            <Button variant="contained" onClick={nextPage} disabled={itemPages == maxPage}>{`>`}</Button>
            </Box>
             </Box>
 
