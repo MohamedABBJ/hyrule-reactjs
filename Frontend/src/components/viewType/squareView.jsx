@@ -4,6 +4,7 @@ import { useState } from "react"
 import MoreOptions from "../ItemBoxes/moreOptions"
 
 export const SquareView = (props) =>{
+    const element = props.element
     const allTagOptions = () =>{
         if(props.element.category == 'monsters'){
             return 'red'
@@ -41,7 +42,7 @@ export const SquareView = (props) =>{
                 <Button>
                 <StarBorder/>
                 </Button>
-                <MoreOptions/>
+                <MoreOptions {...{element}}/>
                 </Box>
 
         </Box>

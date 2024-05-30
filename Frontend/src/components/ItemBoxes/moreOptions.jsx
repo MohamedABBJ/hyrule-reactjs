@@ -1,14 +1,21 @@
 import { MoreHoriz } from "@mui/icons-material";
 import { Button, Menu, MenuItem } from "@mui/material";
 import { useState } from "react";
+import ShowDetails from "./showDetails";
+import { useRequestOne } from "../hooks/useRequestOne";
 
-const MoreOptions = () =>{
+const MoreOptions = (props) =>{
     const [anchorEl, setAnchorEl] = useState(null);
+    const [showDetails, setShowDetails] = useState(false)
     const open = Boolean(anchorEl);
-   
+    const {dataObtained,setInputValue} = useRequestOne()
+  
     const handleClose = () => {
         setAnchorEl(null);
+        setShowDetails(true)
+        setInputValue(props.element.name)
       };
+
       const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
       };
@@ -30,6 +37,7 @@ const MoreOptions = () =>{
         <MenuItem onClick={handleClose}>More details</MenuItem>
         <MenuItem onClick={handleClose}>Save</MenuItem>
       </Menu>
+      {showDetails ? <ShowDetails {...{dataObtained}}/> : null}
         </>
     )
 }
