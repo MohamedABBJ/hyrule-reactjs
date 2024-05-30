@@ -1,5 +1,7 @@
 import { MoreHoriz, StarBorder } from "@mui/icons-material"
-import { Box, Button, Typography } from "@mui/material"
+import { Box, Button, Menu, MenuItem, Typography } from "@mui/material"
+import { useState } from "react"
+import MoreOptions from "../ItemBoxes/moreOptions"
 
 export const SquareView = (props) =>{
     const allTagOptions = () =>{
@@ -16,6 +18,8 @@ export const SquareView = (props) =>{
             return 'brown'
         }
     }
+
+
     return(
         <>
          <Box position={'relative'} border={'solid #6d6d6d 2px'} borderRadius={'3px'}  marginBottom={'5px'} marginLeft={'5px'} width={'285px'} height={'200px'}>
@@ -37,9 +41,7 @@ export const SquareView = (props) =>{
                 <Button>
                 <StarBorder/>
                 </Button>
-                <Button sx={{float:'right'}}>
-                <MoreHoriz/>
-                </Button>
+                <MoreOptions/>
                 </Box>
 
         </Box>

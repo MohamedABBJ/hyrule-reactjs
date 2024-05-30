@@ -35,8 +35,6 @@ export const ItemsPage = () =>{
         }
     }, [searchValue,getItems])
 
-    
-    console.log(maxPage)
     const nextPage = () =>{
         setItemPages(itemPages + 1)
         setPageQuantity(pageQuantity + 50)
@@ -75,14 +73,14 @@ export const ItemsPage = () =>{
         <NavBar props={'side'}/>
 
         {/* Top Bar Search */}
-        <Box position={'relative'} sx={{float:'right'}} right={'0'} width={'94%'}  border={'solid'}>
+        <Box position={'relative'} sx={{float:'right'}} right={'0'} width={'94%'} border={'solid'}>
         <Box marginTop={'10px'} display={'flex'} flexDirection={'row'}>
         <Box  width={'70px'} textAlign={'center'}>
         <Typography>Items</Typography>
         <Typography>{`${obtainedValues.current} Found`}</Typography>
         </Box>
         <Box position={'relative'} marginLeft={'40px'} width={'80%'}  >
-            <Search sx={{position:'absolute', marginLeft:'10px', height:'80%'}} />
+            <Search sx={{position:'absolute', marginLeft:'10px', height:'40px'}} />
         <Input onKeyDown={(event) => event.key == 'Enter' ? setSearchValue(event.target.value) : ''} inputProps={{style:{marginLeft:'40px'}}} sx={{border:'solid',borderRadius:'20px', width:'100%'}}>
         </Input>
         </Box>
@@ -94,14 +92,16 @@ export const ItemsPage = () =>{
 
 
             {/* Items Blocks */}
-            <Box padding={'10px'}  height={'81vh'} width={'98%'} border={'solid'} sx={{overflowY:'scroll'}} marginTop={'20px'} display={'flex'} flexWrap={'wrap'}>
+            <Box padding={'10px'}  height={'86vh'} width={'98%'}  sx={{overflowY:'scroll'}} display={'flex'} flexWrap={'wrap'}>
         <Box width={'100%'} display={'flex'} flexWrap={'wrap'} flexDirection={viewType.flexDirection}>
            {searchValue == '' ? allValues() : searchValueFun()}
         </Box>
-           <Box display={'flex'} flexWrap={'wrap'} width={'100%'} border={'solid'} justifyContent={'end'}>
+           <Box position={'relative'} marginTop={'50px'} width={'100%'}   justifyContent={'end'}>
+            <Box position={'absolute'} right={'0px'} bottom={'30px'} display={'flex'} flexWrap={'wrap'} height={'20px'}>
             <Button variant="contained" onClick={previousPage} disabled={itemPages == 1}>{`<`}</Button>
             <Typography marginTop={'5px'}>{itemPages}</Typography>
             <Button variant="contained" onClick={nextPage} disabled={itemPages == maxPage}>{`>`}</Button>
+            </Box>
            </Box>
             </Box>
 
