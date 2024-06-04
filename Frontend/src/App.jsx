@@ -1,13 +1,20 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import HomeScreen from './pages/home'
+import HomePage from './pages/home'
+import { BrowserRouter, createBrowserRouter, Route, RouterProvider, Routes } from 'react-router-dom'
+import { ItemsPage } from './pages/items'
+
 
 
 function App() {
-  return(
-    <HomeScreen/>
 
+
+  return(
+    <BrowserRouter>
+    <Routes>
+      <Route path='/' element={<HomePage/>}/>
+      <Route path='/items/:id' element={<ItemsPage/>}/>
+    </Routes>
+    </BrowserRouter>
   )
 }
 

@@ -7,17 +7,13 @@ import zIndex from "@mui/material/styles/zIndex"
 import useRequestAll from "../components/hooks/useRequestAll"
 import { useRequestOne } from "../components/hooks/useRequestOne"
 
-const HomeScreen = () =>{
+const HomePage = () =>{
     const {dataObtained,setInputValue} = useRequestOne()
-    
     return( 
-        //Page Content
-        <Box sx={{backgroundColor:'black'}}>
+        <>
+        {/* Navbar Component */}
+            <NavBar props={'top'}/>
         <Box sx={{backgroundRepeat:'no-repeat', backgroundSize:'cover',  backgroundImage:"linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(https://images8.alphacoders.com/976/976005.jpg)"}} position={'relative'} width={'100%'}>
-            {/* Navbar Component */}
-            <Box height={'8vh'} bgcolor={'aqua'} >
-            <NavBar/>
-            </Box>
             {/* SearchBar Compontent */}
             <Box  height={'91vh'}  border={'solid black'} display={dataObtained.state ? 'none' : 'flex'} justifyContent={'center'} alignItems={'center'}>
              <SearchBar {...{setInputValue}}/>
@@ -28,9 +24,9 @@ const HomeScreen = () =>{
             </Box>
 
         </Box>
-        </Box>
+        </>
         
     )
 }
 
-export default HomeScreen
+export default HomePage
