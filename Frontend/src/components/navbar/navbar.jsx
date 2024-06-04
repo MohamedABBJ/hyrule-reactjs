@@ -15,7 +15,7 @@ const NavBar = (type) =>{
 
     return(
         <>
-        {/* Work in progress */}
+
         
         <Box height={navbarForm.height} width={navbarForm.width} bgcolor={'aqua'} position={navbarForm.position} >
         <Link to={'/'}>LOGO</Link>
