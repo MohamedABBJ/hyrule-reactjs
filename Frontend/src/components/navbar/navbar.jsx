@@ -1,3 +1,4 @@
+import { Image } from "@mui/icons-material"
 import { Box, Button, Typography } from "@mui/material"
 import React from "react"
 import { Link } from "react-router-dom"
@@ -15,19 +16,20 @@ const NavBar = (type) =>{
 
     return(
         <>
-
-        
         <Box height={navbarForm.height} width={navbarForm.width} bgcolor={'aqua'} position={navbarForm.position} >
-        <Link to={'/'}>LOGO</Link>
+            <Box display={'flex'}  >
+        <Link to={'/'}>
+            <Box component={'img'} src="../../public/assets/"/>
+        </Link>
         <Link to={'/items'}>Items</Link>
-        <Button>Enemies</Button>
-        <Button>Map</Button>
-        <Button>About</Button>
-        <Button>User</Button>
-        <Button>Github</Button>
-        <Button>
+        <Link>Enemies</Link>
+        <Link>Map</Link>
+        <Link>About</Link>
+        <Link>Github</Link>
+        <Link>
             Login
-        </Button>
+        </Link>
+            </Box>
         </Box>
         </>
     )
