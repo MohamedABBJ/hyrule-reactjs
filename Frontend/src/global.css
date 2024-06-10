@@ -1,3 +1,9 @@
 body{
     margin: 0;
+    font-family:"The_Wild_Breath_of_Zelda";
+}
+
+@font-face {
+    font-family: "The_Wild_Breath_of_Zelda";
+    src: url("../font/The_Wild_Breath_of_Zelda.otf")
 }
