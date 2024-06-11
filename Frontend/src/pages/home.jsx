@@ -13,20 +13,25 @@ const HomePage = () =>{
         <>
         {/* Navbar Component */}
             <NavBar props={'top'}/>
+            
+            {/* 
         <Box sx={{backgroundRepeat:'no-repeat', backgroundSize:'cover',  backgroundImage:"linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(https://images8.alphacoders.com/976/976005.jpg)"}} position={'relative'} width={'100%'}>
-            {/* SearchBar Compontent */}
             <Box  height={'91vh'}  border={'solid black'} display={dataObtained.state ? 'none' : 'flex'} justifyContent={'center'} alignItems={'center'}>
              <SearchBar {...{setInputValue}}/>
-            </Box>
-            {/* Data Obtained Window */}
+            </Box>     
             <Box height={'91vh'} border={'solid black'} display={dataObtained.state ? 'flex' : 'none'} justifyContent={'center'} alignItems={'center'}>
             <ObtainedSearchedData {...{dataObtained,setInputValue}}/>
             </Box>
 
         </Box>
+             */}
         </>
-        
     )
+
+    
 }
+/*
+
+*/
 
 export default HomePage

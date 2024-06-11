@@ -18,7 +18,7 @@ const CutTextAnim = (prop) =>{
 
 const EnemiesBtn = () =>{
     const [animProps, setAnimProps] = useState('0%')
-    const [animPropsTop, setAnimPropsTop] = useState('10%')
+    const [animPropsTop, setAnimPropsTop] = useState('0%')
     const [test, settest] = useState('right 1.5s, top 1.5s')
     const [animState, setAnimState] = useState('first')
     const [textColor, setTextColor] = useState('white')

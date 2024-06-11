@@ -1,8 +1,9 @@
-import { AccountCircle, Image } from "@mui/icons-material";
+import { AccountCircle, GitHub, Image } from "@mui/icons-material";
 import { Box, Button, Icon, IconButton, Typography } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 import EnemiesBtn from "../anims/enemiesBtn";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
 const NavBar = (type) => {
   const conditionTypeTop = type.props == "top";
@@ -16,53 +17,66 @@ const NavBar = (type) => {
 
   return (
     <>
-    <Box  sx={{backgroundColor:'#2c387e'}} height={'15px'}></Box>
-      <Box
-        display={"flex"}
-        alignItems={"center"}
-        height={navbarForm.height}
-        width={navbarForm.width}
-        bgcolor={'#3f51b5'}
-        position={navbarForm.position}
+      <Box sx={{ backgroundColor: "#2c387e" }} height={"15px"}></Box>
+      {/* MUI experimental component need to change when V6 releases Grid1 will be deprecated. */}
+      <Grid2
+        bgcolor={"#3f51b5"}
+        container
+        spacing={2}
+        sx={{
+          "& button": {
+            color: "white",
+            fontFamily: "HyruleFont",
+            fontSize: "1.3rem",
+          },
+        }}
       >
-        <Box sx={{'& button': {color:'white', fontFamily:'HyruleFont', fontSize:'1.3rem'}, '& a':{marginLeft:'50px'}}} display={'flex'} alignItems={'center'} height={'100%'} width={"100%"}>
+        <Grid2>
           <Link to={"/"}>
-            <Button>
-              Home
-            </Button>
+            <Button>Home</Button>
           </Link>
+        </Grid2>
+        <Grid2>
           <Link to={"/items"}>
+            <Button>Items</Button>
+          </Link>
+        </Grid2>
+        <Grid2>
+          <Link>
             <Button>
-                Items
+              <EnemiesBtn />
             </Button>
           </Link>
+        </Grid2>
+        <Grid2>
           <Link>
-          <Button>
-            <EnemiesBtn/>     
-          </Button>
+            <Button>Map</Button>
           </Link>
+        </Grid2>
+        <Grid2>
           <Link>
-          <Button>
-                Map
-            </Button>
+            <Button>About</Button>
           </Link>
-          <Link>
-          <Button>
-                About
-            </Button>
-        </Link>
-        </Box>
-        <Box position={'relative'} display={'flex'} alignItems={'center'} justifyContent={'end'} height={'100%'} width={"20%"}>
-          <Link style={{height:'100%', display:'flex', alignItems:'center', position:'relative'}}>
-          <Button sx={{height:'100%'}}>
-           <Box height={'100%'} component={'img'} src="../../../public/assets/github-logo.webp"/>
-          </Button>
-          </Link>
-          <Link style={{height:'100%', display:'flex', alignItems:'center', position:'relative'}}>          
-            <IconButton sx={{height:'100%'}} children={<AccountCircle sx={{width:'130%', height:'130%', color:'white'}}/>}/>
-          </Link>
-        </Box>
-      </Box>
+        </Grid2>
+        <Grid2 border={'solid'} container display={'flex'} justifyContent={'end'}>
+          <Grid2>
+            <Link>
+            <IconButton children={<GitHub/>}/>
+            </Link>
+          </Grid2>
+          <Grid2>
+            <Link>
+              <IconButton
+                children={
+                  <AccountCircle
+                  />
+                }
+              />
+            </Link>
+          </Grid2>
+        </Grid2>
+
+      </Grid2>
     </>
   );
 };
