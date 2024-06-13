@@ -17,12 +17,12 @@ const NavBar = (type) => {
 
   return (
     <>
-      <Box sx={{ backgroundColor: "#2c387e" }} height={"15px"}></Box>
+      <Grid2 sx={{ backgroundColor: "#2c387e" }} height={"15px"}></Grid2>
       {/* MUI experimental component need to change when V6 releases Grid1 will be deprecated. */}
       <Grid2
         bgcolor={"#3f51b5"}
         container
-        spacing={2}
+        spacing={0}
         sx={{
           "& button": {
             color: "white",
@@ -58,7 +58,8 @@ const NavBar = (type) => {
             <Button>About</Button>
           </Link>
         </Grid2>
-        <Grid2 border={'solid'} container display={'flex'} justifyContent={'end'}>
+        {/* Note, this is absolute, try a way to make it relative */}
+        <Grid2  container position={'absolute'} width={'100%'} justifyContent={'end'}>
           <Grid2>
             <Link>
             <IconButton children={<GitHub/>}/>
