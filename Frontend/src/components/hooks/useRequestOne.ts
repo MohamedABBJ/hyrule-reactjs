@@ -1,18 +1,42 @@
 import axios from "axios"
 import { useEffect, useRef, useState } from "react"
 
+interface RequestValues{
+  url?:string,
+  inputVal?:string,
+}
+
+interface ObtainedValues{
+  id:number,
+  name:string,
+  drops:[],
+  description:string,
+  category:string,
+  image:string,
+  state:boolean
+}
+
+const valuesGetted: ObtainedValues = {
+  id:0,
+  name:'',
+  drops:[],
+  description:'',
+  category:'',
+  image:'',
+  state:false
+}
+
 export const useRequestOne = () =>{
-    const requestOneURL = 'https://botw-compendium.herokuapp.com/api/v3/compendium/entry/'
-    const [inputValue, setInputValue] = useState('')
-    const [dataObtained, setDataObtained] = useState({})
-  
+    const requestOneURL: RequestValues = {url:'https://botw-compendium.herokuapp.com/api/v3/compendium/entry/'}
+    const [inputValue, setInputValue] = useState(<RequestValues>({inputVal:''}))
+    const [dataObtained, setDataObtained] = useState(<ObtainedValues>(valuesGetted))
 
     const makeQuery = async() =>{
         try {
-          const response = await axios.get(requestOneURL + inputValue)
+          const response = await axios.get(`${requestOneURL + '' + inputValue}`)
           const objectData = response.data.data
           setDataObtained({
-            id:objectData.id,
+            id :objectData.id,
             name:objectData.name,
             drops:objectData.drops,
             description:objectData.description,
@@ -28,7 +52,7 @@ export const useRequestOne = () =>{
 
       const removeValues = () =>{
         setDataObtained({
-          id:'',
+            id:'',
             name:'',
             drops:'',
             description:'',
@@ -40,7 +64,7 @@ export const useRequestOne = () =>{
     
 
       useEffect(() => { 
-        inputValue == false ? removeValues() : makeQuery()
+        inputValue == '' ? removeValues() : makeQuery()
       }, [inputValue])
       
     
