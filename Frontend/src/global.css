@@ -1,9 +1,9 @@
 body{
     margin: 0;
-    font-family:"The_Wild_Breath_of_Zelda";
+    font-family:"HyruleFont";
 }
 
 @font-face {
-    font-family: "The_Wild_Breath_of_Zelda";
-    src: url("../font/The_Wild_Breath_of_Zelda.otf")
+    font-family: "HyruleFont";
+    src: url("../public/font/font.otf")
 }

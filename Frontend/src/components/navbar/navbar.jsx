@@ -1,38 +1,85 @@
-import { Image } from "@mui/icons-material"
-import { Box, Button, Typography } from "@mui/material"
-import React from "react"
-import { Link } from "react-router-dom"
+import { AccountCircle, GitHub, Image } from "@mui/icons-material";
+import { Box, Button, Icon, IconButton, Typography } from "@mui/material";
+import React from "react";
+import { Link } from "react-router-dom";
+import EnemiesBtn from "../anims/enemiesBtn";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
-const NavBar = (type) =>{
-    const conditionTypeTop = type.props == 'top'
-    const conditionTypeSide = type.props == 'side'
-    
-    const navbarForm = {
-        height: conditionTypeTop ? '8vh' : conditionTypeSide ? '100vh' : '',
-        width: conditionTypeTop ? '100%' : conditionTypeSide ? '6%' : '',
-        position: conditionTypeTop ? 'relative' : conditionTypeSide ? 'fixed' : ''
-    }
+const NavBar = (type) => {
+  const conditionTypeTop = type.props == "top";
+  const conditionTypeSide = type.props == "side";
 
+  const navbarForm = {
+    height: conditionTypeTop ? "50px" : conditionTypeSide ? "100vh" : "",
+    width: conditionTypeTop ? "100%" : conditionTypeSide ? "6%" : "",
+    position: conditionTypeTop ? "relative" : conditionTypeSide ? "fixed" : "",
+  };
 
-    return(
-        <>
-        <Box height={navbarForm.height} width={navbarForm.width} bgcolor={'aqua'} position={navbarForm.position} >
-            <Box display={'flex'}  >
-        <Link to={'/'}>
-            <Box component={'img'} src="../../public/assets/"/>
-        </Link>
-        <Link to={'/items'}>Items</Link>
-        <Link>Enemies</Link>
-        <Link>Map</Link>
-        <Link>About</Link>
-        <Link>Github</Link>
-        <Link>
-            Login
-        </Link>
-            </Box>
-        </Box>
-        </>
-    )
-}
+  return (
+    <>
+      <Grid2 sx={{ backgroundColor: "#2c387e" }} height={"15px"}></Grid2>
+      {/* MUI experimental component need to change when V6 releases Grid1 will be deprecated. */}
+      <Grid2
+        bgcolor={"#3f51b5"}
+        container
+        spacing={0}
+        sx={{
+          "& button": {
+            color: "white",
+            fontFamily: "HyruleFont",
+            fontSize: "1.3rem",
+          },
+        }}
+      >
+        <Grid2>
+          <Link to={"/"}>
+            <Button>Home</Button>
+          </Link>
+        </Grid2>
+        <Grid2>
+          <Link to={"/items"}>
+            <Button>Items</Button>
+          </Link>
+        </Grid2>
+        <Grid2>
+          <Link>
+            <Button>
+              <EnemiesBtn />
+            </Button>
+          </Link>
+        </Grid2>
+        <Grid2>
+          <Link>
+            <Button>Map</Button>
+          </Link>
+        </Grid2>
+        <Grid2>
+          <Link>
+            <Button>About</Button>
+          </Link>
+        </Grid2>
+        {/* Note, this is absolute, try a way to make it relative */}
+        <Grid2  container position={'absolute'} width={'100%'} justifyContent={'end'}>
+          <Grid2>
+            <Link>
+            <IconButton children={<GitHub/>}/>
+            </Link>
+          </Grid2>
+          <Grid2>
+            <Link>
+              <IconButton
+                children={
+                  <AccountCircle
+                  />
+                }
+              />
+            </Link>
+          </Grid2>
+        </Grid2>
 
-export default NavBar
+      </Grid2>
+    </>
+  );
+};
+//"../../../public/assets/github-logo.webp"
+export default NavBar;

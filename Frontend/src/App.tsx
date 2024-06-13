@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import HomePage from './pages/home'
-import { BrowserRouter, createBrowserRouter, Route, RouterProvider, Routes } from 'react-router-dom'
+import HomePage from './pages/home';
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { ItemsPage } from './pages/items'
 import EnemiesBtn from './components/anims/enemiesBtn'
 import ItemsBtn from './components/anims/itemsBtn'
@@ -8,8 +8,6 @@ import ItemsBtn from './components/anims/itemsBtn'
 
 
 function App() {
-
-
   return(
     <BrowserRouter>
     <Routes>
