@@ -5,7 +5,7 @@ import useRequestAll from "../components/hooks/useRequestAll"
 import { ItemBoxes } from "../components/ItemBoxes/itemboxes"
 import { useEffect, useRef, useState } from "react"
 import { useParams } from "react-router-dom"
-import { usePageQuantity } from "../components/hooks/usePageQuantity"
+
 import useBoxesView from "../components/hooks/useBoxesView"
 
 

@@ -1,11 +1,5 @@
 import axios from "axios"
-import { useEffect, useRef, useState } from "react"
-
-interface RequestValues{
-  url?:string,
-  inputVal?:string,
-}
-
+import { useEffect, useState } from "react"
 interface ObtainedValues{
   id:number,
   name:string,
@@ -27,8 +21,8 @@ const valuesGetted: ObtainedValues = {
 }
 
 export const useRequestOne = () =>{
-    const requestOneURL: RequestValues = {url:'https://botw-compendium.herokuapp.com/api/v3/compendium/entry/'}
-    const [inputValue, setInputValue] = useState(<RequestValues>({inputVal:''}))
+    const requestOneURL: string = 'https://botw-compendium.herokuapp.com/api/v3/compendium/entry/'
+    const [inputValue, setInputValue] = useState(<string>(''))
     const [dataObtained, setDataObtained] = useState(<ObtainedValues>(valuesGetted))
 
     const makeQuery = async() =>{
@@ -51,15 +45,7 @@ export const useRequestOne = () =>{
       }
 
       const removeValues = () =>{
-        setDataObtained({
-            id:'',
-            name:'',
-            drops:'',
-            description:'',
-            category:'',
-            image:'',
-            state:false
-        })
+        setDataObtained(valuesGetted)
       }
     
 

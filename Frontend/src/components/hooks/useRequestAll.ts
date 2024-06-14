@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 const useRequestAll = () =>{
-    const [data, setData] = useState({});
+  const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

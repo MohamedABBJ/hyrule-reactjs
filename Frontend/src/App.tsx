@@ -1,7 +1,8 @@
-import HomePage from './pages/home';
+
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { ItemsPage } from './pages/items'
 import ItemsBtn from './components/anims/itemsBtn'
+import HomePage from './pages/home.tsx'
 
 
 
