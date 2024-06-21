@@ -1,14 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-interface ObtainedValues{
-  id:number,
-  name:string,
-  drops:[],
-  description:string,
-  category:string,
-  image:string,
-  state:boolean
-}
+import ObtainedValues from "../../interfaces/obtainedValues"
 
 const valuesGetted: ObtainedValues = {
   id:0,

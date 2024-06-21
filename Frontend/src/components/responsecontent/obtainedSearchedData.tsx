@@ -1,8 +1,20 @@
 import { Box, Button, Typography } from "@mui/material";
-import React, { Dispatch } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { useRequestOne } from "../hooks/useRequestOne";
+import ObtainedValues from "../../interfaces/obtainedValues";
 
-const ObtainedSearchedData = (props) => {
+const valuesGetted: ObtainedValues = {
+  id:0,
+  name:'',
+  drops:[],
+  description:'',
+  category:'',
+  image:'',
+  state:false
+}
+//here
+
+const ObtainedSearchedData = (props:dataObtained:valuesGetted, setInputValue:React.Dispatch<SetStateAction<boolean>>}) => {
   return (
     <>
       {/* Outer Content */}

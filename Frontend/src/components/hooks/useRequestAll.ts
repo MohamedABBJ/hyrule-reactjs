@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 interface DataValues{
-  dataValue:{}
+  dataValue:[]
 }
 
 const useRequestAll = () =>{

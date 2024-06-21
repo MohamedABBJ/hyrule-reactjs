@@ -1,9 +1,8 @@
-import { MoreHoriz, StarBorder } from "@mui/icons-material"
-import { Box, Button, Menu, MenuItem, Typography } from "@mui/material"
-import { useState } from "react"
+import { StarBorder } from "@mui/icons-material"
+import { Box, Button, Typography } from "@mui/material"
 import MoreOptions from "../ItemBoxes/moreOptions"
 
-export const SquareView = (props) =>{
+export const SquareView = (props:string) =>{
     const element = props.element
     const allTagOptions = () =>{
         if(props.element.category == 'monsters'){

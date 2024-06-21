@@ -2,10 +2,10 @@ import { AccountCircle, GitHub, Image } from "@mui/icons-material";
 import { Box, Button, Icon, IconButton, Typography } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
-import EnemiesBtn from "../anims/enemiesBtn";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import EnemiesBtn from "../anims/enemiesBtn";
 
-const NavBar = (type) => {
+const NavBar = (type:{props:string}) => {
   const conditionTypeTop = type.props == "top";
   const conditionTypeSide = type.props == "side";
 
@@ -42,31 +42,31 @@ const NavBar = (type) => {
           </Link>
         </Grid2>
         <Grid2>
-          <Link>
+          <Link to={'./'}>
             <Button>
               <EnemiesBtn />
             </Button>
           </Link>
         </Grid2>
         <Grid2>
-          <Link>
+          <Link to={'./'}>
             <Button>Map</Button>
           </Link>
         </Grid2>
         <Grid2>
-          <Link>
+          <Link to={'./'}>
             <Button>About</Button>
           </Link>
         </Grid2>
         {/* Note, this is absolute, try a way to make it relative */}
         <Grid2  container position={'absolute'} width={'100%'} justifyContent={'end'}>
           <Grid2>
-            <Link>
+            <Link to={'./'}>
             <IconButton children={<GitHub/>}/>
             </Link>
           </Grid2>
           <Grid2>
-            <Link>
+            <Link to={'./'}>
               <IconButton
                 children={
                   <AccountCircle

@@ -1,8 +1,8 @@
-import { Avatar, Box, TextField, Typography } from "@mui/material"
-import NavBar from "../components/navbar/navbar"
-import SearchBar from "../components/searchbar/searchbar"
+import { Box } from "@mui/material"
 import ObtainedSearchedData from "../components/responsecontent/obtainedSearchedData"
 import { useRequestOne } from "../components/hooks/useRequestOne"
+import NavBar from "../components/navbar/navbar"
+import SearchBar from "../components/searchbar/searchbar"
 
 const HomePage = () =>{
     const {dataObtained,setInputValue} = useRequestOne()
