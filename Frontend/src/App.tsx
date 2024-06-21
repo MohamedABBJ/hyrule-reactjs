@@ -1,7 +1,7 @@
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { ItemsPage } from './pages/items'
-import ItemsBtn from './components/anims/itemsBtn'
+
+import { ItemsPage } from './pages/items.tsx'
 import HomePage from './pages/home.tsx'
 
 
@@ -11,7 +11,6 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path='/' element={<HomePage/>}/>
-      <Route path='Anims' element={<ItemsBtn/>}/>
       <Route path='/items/:id' element={<ItemsPage/>}/>
     </Routes>
     </BrowserRouter>
