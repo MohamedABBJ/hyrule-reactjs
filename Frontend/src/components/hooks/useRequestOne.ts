@@ -14,7 +14,7 @@ const valuesGetted: ObtainedValues = {
 
 export const useRequestOne = () =>{
     const requestOneURL: string = 'https://botw-compendium.herokuapp.com/api/v3/compendium/entry/'
-    const [inputValue, setInputValue] = useState(<string>(''))
+    const [inputValue, setInputValue] = useState<string>('')
     const [dataObtained, setDataObtained] = useState(<ObtainedValues>(valuesGetted))
 
     const makeQuery = async() =>{

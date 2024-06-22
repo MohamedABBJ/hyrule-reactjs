@@ -1,20 +1,11 @@
 import { Box, Button, Typography } from "@mui/material";
 import React, { Dispatch, SetStateAction } from "react";
 import { useRequestOne } from "../hooks/useRequestOne";
-import ObtainedValues from "../../interfaces/obtainedValues";
+import ObtainedValues from "../../interfaces/obtainedValues"; 
 
-const valuesGetted: ObtainedValues = {
-  id:0,
-  name:'',
-  drops:[],
-  description:'',
-  category:'',
-  image:'',
-  state:false
-}
-//here
 
-const ObtainedSearchedData = (props:dataObtained:valuesGetted, setInputValue:React.Dispatch<SetStateAction<boolean>>}) => {
+const ObtainedSearchedData = (props:{dataObtained:ObtainedValues, setInputValue:React.Dispatch<SetStateAction<string>>}) => {
+
   return (
     <>
       {/* Outer Content */}
@@ -38,7 +29,7 @@ const ObtainedSearchedData = (props:dataObtained:valuesGetted, setInputValue:Rea
           <Button
             sx={{ height: "60%" }}
             variant="outlined"
-            onClick={() => props.setInputValue(false)}
+            onClick={() => props.setInputValue('')}
           >
             Search Again
           </Button>

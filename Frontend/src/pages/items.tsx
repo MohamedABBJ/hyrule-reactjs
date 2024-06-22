@@ -3,7 +3,7 @@ import NavBar from "../components/navbar/navbar"
 import { Reorder, Search, StarBorder, ViewModule } from "@mui/icons-material"
 import useRequestAll from "../components/hooks/useRequestAll"
 import { ItemBoxes } from "../components/ItemBoxes/itemboxes"
-import { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { useParams } from "react-router-dom"
 
 import useBoxesView from "../components/hooks/useBoxesView"
@@ -14,15 +14,17 @@ export const ItemsPage = () =>{
     const requestAll = useRequestAll()
     const [searchValue, setSearchValue] = useState('')
     
-    const obtainedValues = useRef()
+    const obtainedValues = useRef<number>()
     const {setViewSelector,viewSelector, viewType} = useBoxesView()
     const [itemPages, setItemPages] = useState(1)
-    const [maxPage, setMaxPage] = useState()
+    const [maxPage, setMaxPage] = useState<number>()
     const [indexQuantity, setIndexQuantity] = useState(0)
     const [pageQuantity, setPageQuantity] = useState(50)
-    const [hasMorePages, setHasMorePages] = useState(true)
-    const getItems = requestAll.data.data?.filter((element) => element.category != 'monsters')
-    const valueSearched = requestAll.data.data?.filter((element) => element.name.includes(searchValue) && element.category != 'monsters')
+
+
+
+    const getItems = requestAll.data.dataValue.filter((element:{category:string}) => element.category != 'monsters')
+    const valueSearched = requestAll.data.dataValue.filter((element:{name:string,category:string}) => element.name.includes(searchValue) && element.category != 'monsters')
     
     
 
@@ -50,9 +52,9 @@ export const ItemsPage = () =>{
     }
 
     const allValues = () =>{
-     obtainedValues.current = requestAll.data.data && requestAll.data.data.length
+     obtainedValues.current = requestAll.data.dataValue && requestAll.data.dataValue.length
         return(
-            getItems?.map((element,index) => index < pageQuantity && index > indexQuantity  ? (<ItemBoxes {...{element,viewSelector}}  key={element.id}/>) : '')
+            getItems?.map((element:{id:number},index) => index < pageQuantity && index > indexQuantity  ? (<ItemBoxes {...{element,viewSelector}}  key={element.id}/>) : '')
         )
     }
 
@@ -64,7 +66,7 @@ export const ItemsPage = () =>{
         obtainedValues.current = valueSearched.length
 
         return(
-            valueSearched?.map((element,index)  => index < pageQuantity && index >= indexQuantity ? (<ItemBoxes {...{element,viewSelector}}  key={element.id}/>) : '')
+            valueSearched?.map((element:{id:number},index)  => index < pageQuantity && index >= indexQuantity ? (<ItemBoxes {...{element,viewSelector}}  key={element.id}/>) : '')
         )
     }
     return(
@@ -81,7 +83,7 @@ export const ItemsPage = () =>{
         </Box>
         <Box position={'relative'} marginLeft={'40px'} width={'80%'}  >
             <Search sx={{position:'absolute', marginLeft:'10px', height:'40px'}} />
-        <Input onKeyDown={(event) => event.key == 'Enter' ? setSearchValue(event.target.value) : ''} inputProps={{style:{marginLeft:'40px'}}} sx={{border:'solid',borderRadius:'20px', width:'100%'}}>
+        <Input onKeyDown={(event) => event.key == 'Enter' ? setSearchValue(event.currentTarget.value) : ''} inputProps={{style:{marginLeft:'40px'}}} sx={{border:'solid',borderRadius:'20px', width:'100%'}}>
         </Input>
         </Box>
         <Box marginLeft={'40px'}>
@@ -93,7 +95,7 @@ export const ItemsPage = () =>{
 
             {/* Items Blocks */}
             <Box padding={'10px'}  height={'86vh'} width={'98%'}  sx={{overflowY:'scroll'}} display={'flex'} flexWrap={'wrap'}>
-        <Box width={'100%'} display={'flex'} flexWrap={'wrap'} flexDirection={viewType.flexDirection}>
+        <Box width={'100%'} display={'flex'} flexWrap={'wrap'} sx={{flexDirection:viewType.flexDirection}}>
            {searchValue == '' ? allValues() : searchValueFun()}
         </Box>
            <Box position={'relative'} marginTop={'50px'} width={'100%'}   justifyContent={'end'}>
