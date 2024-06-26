@@ -5,10 +5,10 @@ import { useEffect, useRef } from "react"
 const CutTextAnim = (prop) =>{
     return(
         <>
-          <Box right={prop.animProps} top={prop.animPropsTop} position={'absolute'}  height={'45%'} marginRight={'8.49px'} id='topText' overflow={'clip'} sx={{rotate:'-5deg', transition:prop.test, transitionDelay:prop.transitionDelay}}>
+          <Box right={prop.animProps} top={prop.animPropsTop} position={'absolute'} ref={prop.topText} height={'45%'} marginRight={'8.49px'} id='topText' overflow={'clip'} sx={{rotate:'-5deg', transition:prop.test, transitionDelay:prop.transitionDelay}}>
           <Typography color={prop.textColor} id='topText' sx={{rotate:'5deg',fontSize:'1.5rem', fontFamily:'HyruleFont', transition:prop.textColorTransition}}>Enemies</Typography>
           </Box>
-          <Box id='bottomText'  overflow={'clip'} top={'41%'} marginLeft={'10px'} position={'absolute'} sx={{rotate:'-5deg'}}>
+          <Box id='bottomText' overflow={'clip'} top={'41%'} marginLeft={'10px'} position={'absolute'} sx={{rotate:'-5deg'}}>
           <Typography color={prop.textColor} sx={{marginTop:'-18%', fontSize:'1.5rem', fontFamily:'HyruleFont', rotate:'5deg', transition:prop.textColorTransition}}>Enemies</Typography>
           </Box>
         </>
@@ -17,6 +17,7 @@ const CutTextAnim = (prop) =>{
 
 
 const EnemiesBtn = () =>{
+    const topText = useRef(null)
     const [animProps, setAnimProps] = useState('0%')
     const [animPropsTop, setAnimPropsTop] = useState('0%')
     const [test, settest] = useState('right 1.5s, top 1.5s')
@@ -28,8 +29,7 @@ const EnemiesBtn = () =>{
     const [showSlash, setShowSlash] = useState('none')
     const [showSlashTrigger, setShowSlashTrigger] = useState(false)
     const [cursorState, setCursorState] = useState(true)
-
-    
+    console.log(topText)
     useEffect(() => {
         if(cursorState && showSlashTrigger){
         setShowSlash('block')
@@ -60,6 +60,7 @@ const EnemiesBtn = () =>{
                 settest('right 1.5s, top 1.5s')
                 setShowSlashTrigger(true)
             })
+           
 
             document.getElementById('outerEnemiesBox').addEventListener('mouseenter', () =>{
                setCancelAnim(false)
@@ -89,7 +90,7 @@ const EnemiesBtn = () =>{
         <audio id="test1" src="'../../../public/Sounds/MonstersSound1.mp3"></audio>
         <Box  width={'100px'} height={'40px'} overflow={'clip'} id='outerEnemiesBox' position={'relative'}>
            <img id="slashAnimation" style={{width:'100px',rotate:'47deg', top:'-30px', left:'-19%', position:'absolute', zIndex:'1', display:showSlash}} src="'../../../public/Gifs/SlashAnimation.gif" alt="" />
-            <CutTextAnim {...{animProps, test, textColor,textColorTransition,transitionDelay,animPropsTop}}/>
+            <CutTextAnim {...{topText, animProps, test, textColor,textColorTransition,transitionDelay,animPropsTop}}/>
         </Box>
         </>
     )

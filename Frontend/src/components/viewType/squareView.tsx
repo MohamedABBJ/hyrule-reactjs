@@ -1,9 +1,12 @@
 import { StarBorder } from "@mui/icons-material"
 import { Box, Button, Typography } from "@mui/material"
 import MoreOptions from "../ItemBoxes/moreOptions"
+import ObtainedValues from "../../interfaces/obtainedValues"
 
-export const SquareView = (props:string) =>{
+export const SquareView = (props:{element:ObtainedValues}) =>{
+
     const element = props.element
+
     const allTagOptions = () =>{
         if(props.element.category == 'monsters'){
             return 'red'
@@ -19,7 +22,6 @@ export const SquareView = (props:string) =>{
         }
     }
 
-
     return(
         <>
          <Box position={'relative'} border={'solid #6d6d6d 2px'} borderRadius={'3px'}  marginBottom={'5px'} marginLeft={'5px'} width={'285px'} height={'200px'}>
@@ -34,7 +36,7 @@ export const SquareView = (props:string) =>{
                 </Box>
                 <Box width={'100%'}  display={'flex'} justifyContent={'center'}>
                 <Box maxHeight={'70px'} width={'80%'}>
-                   <Typography fontSize={'14px'} color={'#9C9C9C'}> {props.element.description.length > 90 ? props.element.description.substring(0,90) + '...' : props.description}</Typography>
+                   <Typography fontSize={'14px'} color={'#9C9C9C'}> {props.element.description.length > 90 ? props.element.description.substring(0,90) + '...' : props.element.description}</Typography>
                 </Box>
                 </Box>
                 <Box sx={{backgroundColor:'#F3F3F3'}} position={'absolute'} width={'100%'} bottom={'0px'} >

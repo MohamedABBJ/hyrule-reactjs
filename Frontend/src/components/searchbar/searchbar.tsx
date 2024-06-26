@@ -5,11 +5,11 @@ import MicIcon from '@mui/icons-material/Mic';
 import useRequestAll from "../hooks/useRequestAll";
 
 const SearchBar = (prop:{setInputValue:Dispatch<SetStateAction<string>>}) =>{
+
 const [opened, setOpened] = useState(false)
-const {data,loading} = useRequestAll()
-const allData = loading ? [''] : data.dataValue.map((element:{name:string}) => element.name) 
 const [handleInputData, setHandleInputData] = useState('')
-  
+
+
     const makeQuery = ()=>{
       return console.log('si')
     }
@@ -30,7 +30,7 @@ const [handleInputData, setHandleInputData] = useState('')
       setHandleInputData((event.target as HTMLInputElement).value)
     }}
     id="combo-box-demo"
-    options={allData}
+    options={[]}
     renderInput={(params) => (  
       <TextField 
       {...params}

@@ -1,20 +1,21 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 
 interface DataValues{
-  dataValue:[]
+  dataValue:{data:[]}
 }
 
 const useRequestAll = () =>{
-  const [data, setData] = useState(<DataValues>({dataValue:{}}));
+  const [data, setData] = useState(<DataValues>({}));
   const [loading, setLoading] = useState(<boolean>(false));
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const {data: dataVal} = await axios.get('https://botw-compendium.herokuapp.com/api/v3/compendium/all');
-        setData({dataValue:dataVal});
+        //TODO: Add type to this request, data & dataVal are any
+        const {data:obtainedData} : AxiosResponse<{data:[]}> = await axios.get('https://botw-compendium.herokuapp.com/api/v3/compendium/all');
+        setData({dataValue:{data:obtainedData.data}});
       } catch (error) {
         console.error(error)
       }
@@ -24,6 +25,7 @@ const useRequestAll = () =>{
     fetchData();
   }, []);
 
+  
   return {
     data,
     loading,

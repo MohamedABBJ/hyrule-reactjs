@@ -7,6 +7,7 @@ import React, { useEffect, useRef, useState } from "react"
 import { useParams } from "react-router-dom"
 
 import useBoxesView from "../components/hooks/useBoxesView"
+import ObtainedValues from "../interfaces/obtainedValues"
 
 
 export const ItemsPage = () =>{
@@ -22,12 +23,9 @@ export const ItemsPage = () =>{
     const [pageQuantity, setPageQuantity] = useState(50)
 
 
-
-    const getItems = requestAll.data.dataValue.filter((element:{category:string}) => element.category != 'monsters')
-    const valueSearched = requestAll.data.dataValue.filter((element:{name:string,category:string}) => element.name.includes(searchValue) && element.category != 'monsters')
+    const getItems =  requestAll.data.dataValue && requestAll.data.dataValue.data.filter((element:{category:string}) => element.category != 'monsters')
+    const valueSearched = requestAll.data.dataValue && requestAll.data.dataValue.data.filter((element:{name:string,category:string}) => element.name.includes(searchValue) && element.category != 'monsters')
     
-    
-
     useEffect(() => {
         if (searchValue != '') {
             setItemPages(1)
@@ -52,9 +50,9 @@ export const ItemsPage = () =>{
     }
 
     const allValues = () =>{
-     obtainedValues.current = requestAll.data.dataValue && requestAll.data.dataValue.length
+     obtainedValues.current = requestAll.data.dataValue && requestAll.data.dataValue.data.length
         return(
-            getItems?.map((element:{id:number},index) => index < pageQuantity && index > indexQuantity  ? (<ItemBoxes {...{element,viewSelector}}  key={element.id}/>) : '')
+            getItems?.map((element:ObtainedValues,index) => index < pageQuantity && index > indexQuantity  ? (<ItemBoxes {...{element,viewSelector}}  key={element.id}/>) : '')
         )
     }
 
@@ -66,7 +64,7 @@ export const ItemsPage = () =>{
         obtainedValues.current = valueSearched.length
 
         return(
-            valueSearched?.map((element:{id:number},index)  => index < pageQuantity && index >= indexQuantity ? (<ItemBoxes {...{element,viewSelector}}  key={element.id}/>) : '')
+            valueSearched?.map((element:ObtainedValues,index)  => index < pageQuantity && index >= indexQuantity ? (<ItemBoxes {...{element,viewSelector}}  key={element.id}/>) : '')
         )
     }
     return(

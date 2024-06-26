@@ -4,7 +4,7 @@ import { useRequestOne } from "../hooks/useRequestOne";
 import ObtainedValues from "../../interfaces/obtainedValues"; 
 
 
-const ObtainedSearchedData = (props:{dataObtained:ObtainedValues, setInputValue:React.Dispatch<SetStateAction<string>>}) => {
+const ObtainedSearchedData = (props:{dataObtained:ObtainedValues, setInputValue?:React.Dispatch<SetStateAction<string>>}) => {
 
   return (
     <>
@@ -29,7 +29,7 @@ const ObtainedSearchedData = (props:{dataObtained:ObtainedValues, setInputValue:
           <Button
             sx={{ height: "60%" }}
             variant="outlined"
-            onClick={() => props.setInputValue('')}
+            onClick={() => props.setInputValue && props.setInputValue('')}
           >
             Search Again
           </Button>

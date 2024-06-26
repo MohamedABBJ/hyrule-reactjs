@@ -1,12 +1,15 @@
 import { Box, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material"
 import ObtainedSearchedData from "../responsecontent/obtainedSearchedData"
+import ObtainedValues from "../../interfaces/obtainedValues"
 
-const ShowDetails = (props) =>{
-    const dataObtained = props.dataObtained
+const ShowDetails = (props:{element:ObtainedValues}) =>{
+
+    const dataObtained = props.element
+    
     return(
         <>
         <Dialog
-        open={open}
+        open={false}
         keepMounted
         aria-describedby="alert-dialog-slide-description"
       >
