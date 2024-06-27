@@ -58,6 +58,8 @@ const EnemiesBtn = () =>{
         setTransitionDelay('3000ms')
         setTextColorTransition('color 3.3s')
         setTextColor('red')
+        setShowSlash('none')
+        slashGif.current ? slashGif.current.src = '../../../public/Gifs/SlashAnimation.gif' : null
     }
     const cancelAnimation = () =>{
         audioSound.current.currentTime = 0
@@ -73,10 +75,10 @@ const EnemiesBtn = () =>{
         setTextColorTransition('color 0s')
     }
     const animationEnded = () =>{
-        console.log('si')
         setAnimProps('4%')
         setAnimPropsTop('0%')
         settest('right 1.5s, top 1.5s')
+        
         if(cursorState){
             setShowSlash('block')
             setTimeout(() => {
@@ -89,15 +91,12 @@ const EnemiesBtn = () =>{
 
     return(
         <>
-        <audio ref={audioSound} id="sound1" src="'../../../public/Sounds/MonstersSound1.mp3"></audio>
-        <Button sx={{height:'100%'}}  onMouseEnter={startAnimation} onMouseLeave={cancelAnimation} >
-          <Box onTransitionEnd={animationEnded} right={animProps} top={animPropsTop} position={'absolute'} ref={topText} height={'45%'} marginRight={'8.49px'} id='topText' overflow={'clip'} sx={{rotate:'-5deg', transition:test, transitionDelay:transitionDelay}}>
-          <img ref={slashGif} id="slashAnimation" style={{width:'100px',rotate:'47deg', top:'-30px', left:'-19%', position:'absolute', zIndex:'1', display:showSlash}} src="'../../../public/Gifs/SlashAnimation.gif" alt="" />
-          <Typography  color={textColor} id='topText' sx={{rotate:'5deg',fontSize:'1.5rem', fontFamily:'HyruleFont', transition:textColorTransition}}>Enemies</Typography>
+        <audio ref={audioSound} id="sound1" src="../../../public/Sounds/MonstersSound1.mp3"></audio>
+        <Button sx={{height:'100%', display:'flex', alignItems:'center', border:'solid'}}  onMouseEnter={startAnimation} onMouseLeave={cancelAnimation} >
+          <Box height={'20%'} display={'flex'} alignItems={'center'} overflow={'clip'} border={'solid'} sx={{rotate:'-5deg', transition:test, transitionDelay:transitionDelay}}>
+            Enemies
           </Box>
-          <Box id='bottomText' overflow={'clip'} top={'41%'} marginLeft={'10px'} position={'absolute'} sx={{rotate:'-5deg'}}>
-          <Typography color={textColor} sx={{marginTop:'-18%', fontSize:'1.5rem', fontFamily:'HyruleFont', rotate:'5deg', transition:textColorTransition}}>Enemies</Typography>
-          </Box>
+          
         </Button>
         </>
     )
@@ -108,3 +107,13 @@ export default EnemiesBtn
 {/* 
     <CutTextAnim {...{topText, animProps, test, textColor,textColorTransition,transitionDelay,animPropsTop}}/>
     */}
+
+    /*
+<Box onTransitionEnd={animationEnded} right={animProps} top={animPropsTop} position={'absolute'} ref={topText} height={'45%'} marginRight={'8.49px'} id='topText' overflow={'clip'} sx={{rotate:'-5deg', transition:test, transitionDelay:transitionDelay}}>
+          <img ref={slashGif} id="slashAnimation" style={{width:'100px',rotate:'47deg', top:'-30px', left:'-19%', position:'absolute', zIndex:'1', display:showSlash}} src="../../../public/Gifs/SlashAnimation.gif" alt="" />
+          <Typography  color={textColor} id='topText' sx={{rotate:'5deg', fontFamily:'HyruleFont', transition:textColorTransition}}>Enemies</Typography>
+          </Box>
+          <Box id='bottomText' overflow={'clip'} top={'41%'} position={'absolute'} sx={{rotate:'-5deg'}}>
+          <Typography color={textColor} sx={{marginTop:'-18%', fontFamily:'HyruleFont', rotate:'5deg', transition:textColorTransition}}>Enemies</Typography>
+          </Box>
+    */
