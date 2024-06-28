@@ -2,89 +2,69 @@ import { Box, Button, Typography } from "@mui/material"
 import React, { AudioHTMLAttributes, useState } from "react"
 import { useEffect, useRef } from "react"
 
-const CutTextAnim = (prop) =>{
-    return(
-        <>
-          <Box right={prop.animProps} top={prop.animPropsTop} position={'absolute'} ref={prop.topText} height={'45%'} marginRight={'8.49px'} id='topText' overflow={'clip'} sx={{rotate:'-5deg', transition:prop.test, transitionDelay:prop.transitionDelay}}>
-          <Typography color={prop.textColor} id='topText' sx={{rotate:'5deg',fontSize:'1.5rem', fontFamily:'HyruleFont', transition:prop.textColorTransition}}>Enemies</Typography>
-          </Box>
-          <Box id='bottomText' overflow={'clip'} top={'41%'} marginLeft={'10px'} position={'absolute'} sx={{rotate:'-5deg'}}>
-          <Typography color={prop.textColor} sx={{marginTop:'-18%', fontSize:'1.5rem', fontFamily:'HyruleFont', rotate:'5deg', transition:prop.textColorTransition}}>Enemies</Typography>
-          </Box>
-        </>
-    )
-}
-
-
 const EnemiesBtn = () =>{
-    const topText = useRef(null)
-    const [animProps, setAnimProps] = useState('0%')
-    const [animPropsTop, setAnimPropsTop] = useState('0%')
-    const [test, settest] = useState('right 1.5s, top 1.5s')
-    const [textColor, setTextColor] = useState('white')
-    const [textColorTransition, setTextColorTransition] = useState('color 3s')
-    const [cancelAnim, setCancelAnim] = useState(false)
-    const [transitionDelay, setTransitionDelay] = useState('3000ms')
+    const [buttonAnimationProps, setButtonAnimationProps] = useState({
+        textColor:'white',
+        textColorTransition:'color 3s',
+        topTextTransition:'left 1.5s, top 1.5s',
+        topTextTrantisionDelay:'3000ms',
+        topTextPositionTop:'12%',
+        topTextPositionLeft:'6%'
+    }) 
+    const [playOnce, setPlayOnce] = useState(false)
     const [showSlash, setShowSlash] = useState('none')
-    const [showSlashTrigger, setShowSlashTrigger] = useState(false)
-    const [cursorState, setCursorState] = useState(true)
-    const audioSound = useRef<AudioHTMLAttributes>(null)
+    const audioSound = useRef<HTMLAudioElement>(null)
     const slashGif = useRef<HTMLImageElement>(null)
-    /* 
-    useEffect(() => {
-        if(cursorState && showSlashTrigger){
-        setShowSlash('block')
-        document.getElementById('slashAnimation').src = '../../../public/Gifs/SlashAnimation.gif'
-        setTimeout(() => {
-            document.getElementById('slashAnimation').src = ''
-            setCursorState(false)
-        }, 500);
-
-        setTextColorTransition('color 0.1s')
-        setTextColor('gray')
-        setTimeout(() => {
-            setTextColorTransition('color 0.3s')
-        setTextColor('white')
-        }, 200);
-
-    }
-    }, [cursorState, showSlashTrigger])
-     */
-    
 
     const startAnimation = () =>{
-        setCancelAnim(false)
-        audioSound.current.play()
-        setTransitionDelay('3000ms')
-        setTextColorTransition('color 3.3s')
-        setTextColor('red')
+        audioSound.current && audioSound.current.play()
         setShowSlash('none')
+        setPlayOnce(true)
+        setButtonAnimationProps(prevState => ({
+            ...prevState,
+            textColor:'red',
+            textColorTransition:'color 3.3s',
+            topTextTrantisionDelay:'3000ms'
+
+        }))
         slashGif.current ? slashGif.current.src = '../../../public/Gifs/SlashAnimation.gif' : null
     }
     const cancelAnimation = () =>{
-        audioSound.current.currentTime = 0
-        audioSound.current.pause()
-        setCursorState(true)
-        setShowSlashTrigger(false)
-        setTransitionDelay('0ms')
-        setCancelAnim(true)
-        setTextColor('white')
-        setAnimProps('0px')
-        setAnimPropsTop('0%')
-        settest('right 0s, top 0s')
-        setTextColorTransition('color 0s')
+        audioSound.current ? audioSound.current.currentTime = 0 : null
+        audioSound.current && audioSound.current.pause()
+        setPlayOnce(false)
+        setButtonAnimationProps(prevState => ({
+            ...prevState,
+            textColor:'white',
+            textColorTransition:'color 0s',
+            topTextTransition:'left 0s, top 0s',
+            topTextTrantisionDelay:'0ms',
+            topTextPositionTop:'12%',
+            topTextPositionLeft:'6%',
+        }))
     }
     const animationEnded = () =>{
-        setAnimProps('4%')
-        setAnimPropsTop('0%')
-        settest('right 1.5s, top 1.5s')
-        
-        if(cursorState){
+        if(playOnce){
             setShowSlash('block')
-            setTimeout(() => {
-                slashGif.current ? slashGif.current.src = '' : null
-                setCursorState(false)
-            }, 500);
+            setButtonAnimationProps(prevState => ({
+                ...prevState,
+                topTextTransition:'left 1.5s, top 1.5s',
+                topTextPositionTop:'13%',
+                topTextPositionLeft:'2%',
+                textColor:'gray',
+                textColorTransition:'color 0.1s'
+            }))
+                setTimeout(() => {
+                    slashGif.current ? slashGif.current.src = '' : null
+                }, 500);
+                setTimeout(() => {                
+                    setButtonAnimationProps(prevState => ({
+                        ...prevState,
+                        textColor:'white',
+                        textColorTransition:'color 0s'
+                    }))
+                }, 300);
+            setPlayOnce(false)
         }
 
     }
@@ -92,10 +72,23 @@ const EnemiesBtn = () =>{
     return(
         <>
         <audio ref={audioSound} id="sound1" src="../../../public/Sounds/MonstersSound1.mp3"></audio>
-        <Button sx={{height:'100%', display:'flex', alignItems:'center', border:'solid'}}  onMouseEnter={startAnimation} onMouseLeave={cancelAnimation} >
-          <Box height={'20%'} display={'flex'} alignItems={'center'} overflow={'clip'} border={'solid'} sx={{rotate:'-5deg', transition:test, transitionDelay:transitionDelay}}>
+        <Button sx={{height:'100%', padding:'0 45px',  display:'flex', alignItems:'center'}} onMouseEnter={startAnimation} onMouseLeave={cancelAnimation} >
+        <img ref={slashGif} id="slashAnimation" style={{width:'100px',rotate:'47deg', position:'absolute', bottom:'-60%', zIndex:'1', display:showSlash}} src="../../../public/Gifs/SlashAnimation.gif" alt="" />
+    
+          <Box onTransitionEnd={animationEnded} display={'flex'} position={'absolute'}  alignItems={'start'} left={buttonAnimationProps.topTextPositionLeft} top={buttonAnimationProps.topTextPositionTop} justifyContent={'center'} height={'35%'}  marginBottom={'auto'} overflow={'clip'}  sx={{rotate:'-5deg', transition:buttonAnimationProps.topTextTransition, transitionDelay:buttonAnimationProps.topTextTrantisionDelay}}>
+            <Box color={buttonAnimationProps.textColor} sx={{rotate:'5deg', transition:buttonAnimationProps.textColorTransition}}>
             Enemies
+            </Box>
           </Box>
+
+         
+          <Box bottom={'10%'} display={'flex'}  alignItems={'end'}  position={'absolute'} overflow={'clip'} height={'45%'}  sx={{rotate:'-5deg'}}>
+            <Box color={buttonAnimationProps.textColor} sx={{rotate:'5deg', transition:buttonAnimationProps.textColorTransition}}>
+            Enemies
+            </Box>
+          </Box>
+         
+
           
         </Button>
         </>
@@ -103,17 +96,3 @@ const EnemiesBtn = () =>{
 }
 
 export default EnemiesBtn
-
-{/* 
-    <CutTextAnim {...{topText, animProps, test, textColor,textColorTransition,transitionDelay,animPropsTop}}/>
-    */}
-
-    /*
-<Box onTransitionEnd={animationEnded} right={animProps} top={animPropsTop} position={'absolute'} ref={topText} height={'45%'} marginRight={'8.49px'} id='topText' overflow={'clip'} sx={{rotate:'-5deg', transition:test, transitionDelay:transitionDelay}}>
-          <img ref={slashGif} id="slashAnimation" style={{width:'100px',rotate:'47deg', top:'-30px', left:'-19%', position:'absolute', zIndex:'1', display:showSlash}} src="../../../public/Gifs/SlashAnimation.gif" alt="" />
-          <Typography  color={textColor} id='topText' sx={{rotate:'5deg', fontFamily:'HyruleFont', transition:textColorTransition}}>Enemies</Typography>
-          </Box>
-          <Box id='bottomText' overflow={'clip'} top={'41%'} position={'absolute'} sx={{rotate:'-5deg'}}>
-          <Typography color={textColor} sx={{marginTop:'-18%', fontFamily:'HyruleFont', rotate:'5deg', transition:textColorTransition}}>Enemies</Typography>
-          </Box>
-    */
