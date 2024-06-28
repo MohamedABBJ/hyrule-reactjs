@@ -1,7 +1,8 @@
 import { MoreHoriz, StarBorder } from "@mui/icons-material"
 import { Box, Button, Typography } from "@mui/material"
+import ObtainedValues from "../../interfaces/obtainedValues"
 
-export const LineView = (props) =>{
+export const LineView = (props:{element:ObtainedValues}) =>{
     const allTagOptions = () =>{
         if(props.element.category == 'monsters'){
             return 'red'

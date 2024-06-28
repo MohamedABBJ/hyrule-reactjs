@@ -1,11 +1,9 @@
-import { MoreHoriz, StarBorder } from "@mui/icons-material"
-import { Box, Button, Typography } from "@mui/material"
-import { useEffect } from "react"
-import useBoxesView from "../hooks/useBoxesView"
+import { Box } from "@mui/material"
 import { SquareView } from "../viewType/squareView"
 import { LineView } from "../viewType/lineView"
+import ObtainedValues from "../../interfaces/obtainedValues"
 
-export const ItemBoxes = (props) =>{
+export const ItemBoxes = (props:{viewSelector:string, element:ObtainedValues}) =>{
     const element = props.element
     
     return props.viewSelector == 'square' ?

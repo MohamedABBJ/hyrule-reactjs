@@ -3,9 +3,8 @@ import { Box, Button, Icon, IconButton, Typography } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 import EnemiesBtn from "../anims/enemiesBtn";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
-const NavBar = (type) => {
+const NavBar = (type:{props:string}) => {
   const conditionTypeTop = type.props == "top";
   const conditionTypeSide = type.props == "side";
 
@@ -17,12 +16,11 @@ const NavBar = (type) => {
 
   return (
     <>
-      <Grid2 sx={{ backgroundColor: "#2c387e" }} height={"15px"}></Grid2>
+      <Box sx={{ backgroundColor: "#2c387e" }} height={"15px"}></Box>
       {/* MUI experimental component need to change when V6 releases Grid1 will be deprecated. */}
-      <Grid2
+      <Box
+      display={'flex'}
         bgcolor={"#3f51b5"}
-        container
-        spacing={0}
         sx={{
           "& button": {
             color: "white",
@@ -31,42 +29,39 @@ const NavBar = (type) => {
           },
         }}
       >
-        <Grid2>
+        <Box>
           <Link to={"/"}>
             <Button>Home</Button>
           </Link>
-        </Grid2>
-        <Grid2>
+        </Box>
+        <Box>
           <Link to={"/items"}>
             <Button>Items</Button>
           </Link>
-        </Grid2>
-        <Grid2>
-          <Link>
-            <Button>
-              <EnemiesBtn />
-            </Button>
+        </Box>
+        <Box>
+          <Link to={'./'}>
+            <EnemiesBtn/>
           </Link>
-        </Grid2>
-        <Grid2>
-          <Link>
+        </Box>
+        <Box>
+          <Link to={'./'}>
             <Button>Map</Button>
           </Link>
-        </Grid2>
-        <Grid2>
-          <Link>
+        </Box>
+        <Box>
+          <Link to={'./'}>
             <Button>About</Button>
           </Link>
-        </Grid2>
-        {/* Note, this is absolute, try a way to make it relative */}
-        <Grid2  container position={'absolute'} width={'100%'} justifyContent={'end'}>
-          <Grid2>
-            <Link>
+        </Box>
+        <Box marginLeft={'auto'} display={'flex'}>
+          <Box>
+            <Link to={'./'}>
             <IconButton children={<GitHub/>}/>
             </Link>
-          </Grid2>
-          <Grid2>
-            <Link>
+          </Box>
+          <Box>
+            <Link to={'./'}>
               <IconButton
                 children={
                   <AccountCircle
@@ -74,10 +69,10 @@ const NavBar = (type) => {
                 }
               />
             </Link>
-          </Grid2>
-        </Grid2>
+          </Box>
+        </Box>
 
-      </Grid2>
+      </Box>
     </>
   );
 };
