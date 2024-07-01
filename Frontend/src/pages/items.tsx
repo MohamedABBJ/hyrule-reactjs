@@ -33,10 +33,8 @@ export const ItemsPage = () =>{
     const [maxPage, setMaxPage] = useState<number>()
     const [indexQuantity, setIndexQuantity] = useState(0)
     const [pageQuantity, setPageQuantity] = useState(50)
-    
     const {itemSelected} = useItemMoreDetails()
 
-    console.log(itemSelected)
 
     
     
@@ -88,7 +86,7 @@ export const ItemsPage = () =>{
     return(
         <>
         {/* Item Details */}
-        {/* <ShowDetails /> */}
+         <ShowDetails itemSelected={itemSelected}/> 
         
 
         <NavBar props={'side'}/>
