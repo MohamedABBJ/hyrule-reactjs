@@ -35,7 +35,7 @@ export const ItemsPage = () =>{
     const [pageQuantity, setPageQuantity] = useState(50)
     const {itemSelected} = useItemMoreDetails()
 
-
+    console.log(itemSelected)
     
     
 

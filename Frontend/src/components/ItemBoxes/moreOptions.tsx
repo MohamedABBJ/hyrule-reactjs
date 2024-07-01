@@ -15,7 +15,6 @@ const MoreOptions = (props:{element:ObtainedValues}) =>{
     const [openState, setOpenState] = useState<boolean>(false)
     const {setItemSelected} = useItemMoreDetails()
 
-  
     const handleClose = () => {
         setAnchorEl(null);
         setShowDetails(true)

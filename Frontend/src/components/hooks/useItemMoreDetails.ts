@@ -17,9 +17,9 @@ const valuesGetted: ObtainedValues = {
     state:false
   }
 
-const useItemMoreDetails = create<ItemMoreDetails>(() =>({
+const useItemMoreDetails = create<ItemMoreDetails>((set) =>({
     itemSelected:valuesGetted,
-    setItemSelected: ((valuesObtained) => ({itemSelected : valuesObtained}))
+    setItemSelected: ((itemSelected) => set({itemSelected}))
 }))
 
 export default useItemMoreDetails
