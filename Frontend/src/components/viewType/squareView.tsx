@@ -3,11 +3,9 @@ import { Box, Button, Typography } from "@mui/material"
 import MoreOptions from "../ItemBoxes/moreOptions"
 import ObtainedValues from "../../interfaces/obtainedValues"
 
-export const SquareView = (props:{element:ObtainedValues,setMoreOptionsItemSelectedValue:React.Dispatch<React.SetStateAction<ObtainedValues>>}) =>{
+export const SquareView = (props:{element:ObtainedValues}) =>{
 
     const element = props.element
-    const setMoreOptionsItemSelectedValue = props.setMoreOptionsItemSelectedValue
-
     const allTagOptions = () =>{
         if(props.element.category == 'monsters'){
             return 'red'
@@ -44,7 +42,7 @@ export const SquareView = (props:{element:ObtainedValues,setMoreOptionsItemSelec
                 <Button>
                 <StarBorder/>
                 </Button>
-                <MoreOptions {...{element,setMoreOptionsItemSelectedValue}}/>
+                <MoreOptions {...{element}}/>
                 </Box>
 
         </Box>

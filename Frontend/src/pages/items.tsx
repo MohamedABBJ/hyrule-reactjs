@@ -9,6 +9,8 @@ import { useParams } from "react-router-dom"
 import useBoxesView from "../components/hooks/useBoxesView"
 import ObtainedValues from "../interfaces/obtainedValues"
 import ShowDetails from "../components/ItemBoxes/showDetails"
+import useItemMoreDetails from "../components/hooks/useItemMoreDetails"
+import { useShallow } from "zustand/react/shallow"
 
 const valuesGetted: ObtainedValues = {
     id:0,
@@ -31,8 +33,13 @@ export const ItemsPage = () =>{
     const [maxPage, setMaxPage] = useState<number>()
     const [indexQuantity, setIndexQuantity] = useState(0)
     const [pageQuantity, setPageQuantity] = useState(50)
+    
+    const {itemSelected} = useItemMoreDetails()
 
-   const [moreOptionsItemSelectedValue, setMoreOptionsItemSelectedValue] = useState(valuesGetted)
+    console.log(itemSelected)
+
+    
+    
 
     const getItems =  requestAll.data.dataValue && requestAll.data.dataValue.data.filter((element:{category:string}) => element.category != 'monsters')
     const valueSearched = requestAll.data.dataValue && requestAll.data.dataValue.data.filter((element:{name:string,category:string}) => element.name.includes(searchValue) && element.category != 'monsters')
@@ -63,7 +70,7 @@ export const ItemsPage = () =>{
     const allValues = () =>{
      obtainedValues.current = requestAll.data.dataValue && requestAll.data.dataValue.data.length
         return(
-            getItems?.map((element:ObtainedValues,index) => index < pageQuantity && index > indexQuantity  ? (<ItemBoxes {...{element,viewSelector,setMoreOptionsItemSelectedValue}}  key={element.id}/>) : '')
+            getItems?.map((element:ObtainedValues,index) => index < pageQuantity && index > indexQuantity  ? (<ItemBoxes {...{element,viewSelector}}  key={element.id}/>) : '')
         )
     }
 
@@ -75,13 +82,13 @@ export const ItemsPage = () =>{
         obtainedValues.current = valueSearched.length
 
         return(
-            valueSearched?.map((element:ObtainedValues,index)  => index < pageQuantity && index >= indexQuantity ? (<ItemBoxes {...{element,viewSelector,setMoreOptionsItemSelectedValue}}  key={element.id}/>) : '')
+            valueSearched?.map((element:ObtainedValues,index)  => index < pageQuantity && index >= indexQuantity ? (<ItemBoxes {...{element,viewSelector}}  key={element.id}/>) : '')
         )
     }
     return(
         <>
         {/* Item Details */}
-        <ShowDetails {...{moreOptionsItemSelectedValue}}/>
+        {/* <ShowDetails /> */}
         
 
         <NavBar props={'side'}/>

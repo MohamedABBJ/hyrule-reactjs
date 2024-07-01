@@ -4,14 +4,16 @@ import React, { useContext, useState } from "react";
 import ShowDetails from "./showDetails";
 import { useRequestOne } from "../hooks/useRequestOne";
 import ObtainedValues from "../../interfaces/obtainedValues";
+import useItemMoreDetails from "../hooks/useItemMoreDetails";
 
 
-const MoreOptions = (props:{element:ObtainedValues, setMoreOptionsItemSelectedValue:React.Dispatch<React.SetStateAction<ObtainedValues>>}) =>{
+const MoreOptions = (props:{element:ObtainedValues}) =>{
     const [anchorEl, setAnchorEl] = useState(null);
     const [showDetails, setShowDetails] = useState(false)
     const open = Boolean(anchorEl);
     const {dataObtained,setInputValue} = useRequestOne()
     const [openState, setOpenState] = useState<boolean>(false)
+    const {setItemSelected} = useItemMoreDetails()
 
   
     const handleClose = () => {
@@ -39,7 +41,7 @@ const MoreOptions = (props:{element:ObtainedValues, setMoreOptionsItemSelectedVa
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={() => (setOpenState(true),setAnchorEl(null), props.setMoreOptionsItemSelectedValue(props.element))}>More details</MenuItem>
+        <MenuItem onClick={() => (setOpenState(true),setAnchorEl(null), setItemSelected(props.element))}>More details</MenuItem>
       </Menu>
         </>
     )
