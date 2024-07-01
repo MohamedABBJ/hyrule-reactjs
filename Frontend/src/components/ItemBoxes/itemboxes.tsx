@@ -5,7 +5,6 @@ import ObtainedValues from "../../interfaces/obtainedValues"
 
 export const ItemBoxes = (props:{viewSelector:string, element:ObtainedValues}) =>{
     const element = props.element
-    
     return props.viewSelector == 'square' ?
     <Box>
         <SquareView {...{element}}/>

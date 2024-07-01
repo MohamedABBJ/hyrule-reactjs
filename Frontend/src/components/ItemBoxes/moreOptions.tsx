@@ -1,16 +1,20 @@
 import { MoreHoriz } from "@mui/icons-material";
 import { Button, Menu, MenuItem } from "@mui/material";
-import { useState } from "react";
+import React, { useContext, useState } from "react";
 import ShowDetails from "./showDetails";
 import { useRequestOne } from "../hooks/useRequestOne";
 import ObtainedValues from "../../interfaces/obtainedValues";
+import useItemMoreDetails from "../store/itemMoreDetails";
+
 
 const MoreOptions = (props:{element:ObtainedValues}) =>{
     const [anchorEl, setAnchorEl] = useState(null);
     const [showDetails, setShowDetails] = useState(false)
     const open = Boolean(anchorEl);
     const {dataObtained,setInputValue} = useRequestOne()
-  
+    const [openState, setOpenState] = useState<boolean>(false)
+    const {setItemSelected} = useItemMoreDetails()
+
     const handleClose = () => {
         setAnchorEl(null);
         setShowDetails(true)
@@ -36,10 +40,8 @@ const MoreOptions = (props:{element:ObtainedValues}) =>{
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClose}>More details</MenuItem>
-        <MenuItem onClick={handleClose}>Save</MenuItem>
+        <MenuItem onClick={() => (setOpenState(true),setAnchorEl(null), setItemSelected(props.element))}>More details</MenuItem>
       </Menu>
-      {showDetails ? <ShowDetails element={dataObtained}/> : null}
         </>
     )
 }

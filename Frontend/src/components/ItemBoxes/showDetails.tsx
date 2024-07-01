@@ -1,28 +1,18 @@
-import { Box, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material"
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material"
 import ObtainedSearchedData from "../responsecontent/obtainedSearchedData"
 import ObtainedValues from "../../interfaces/obtainedValues"
+import { Fragment } from "react/jsx-runtime"
+import React from "react"
 
-const ShowDetails = (props:{element:ObtainedValues}) =>{
+const ShowDetails = (props:{itemSelected:ObtainedValues}) =>{
 
-    const dataObtained = props.element
-    
-    return(
-        <>
-        <Dialog
-        open={false}
-        keepMounted
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogTitle>{"Use Google's location service?"}</DialogTitle>
-        <DialogContent>
-         <ObtainedSearchedData {...{dataObtained}}/>
-        </DialogContent>
-        <DialogActions>
-        
-        </DialogActions>
-      </Dialog>
-        </>
-    )
+    return (
+      <Box display={'none'} justifyContent={'center'} alignItems={'center'}  position={'absolute'} width={'100%'} height={'100%'}>
+      <Box sx={{backgroundColor:'black', opacity:'0.42'}} zIndex={'1'} position={'absolute'}  width={'100%'} height={'100%'}/>
+      <ObtainedSearchedData dataObtained={props.itemSelected}/>
+      </Box>
+
+    );
 }
 
 export default ShowDetails

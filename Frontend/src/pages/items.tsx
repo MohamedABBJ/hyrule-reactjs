@@ -3,12 +3,24 @@ import NavBar from "../components/navbar/navbar"
 import { Reorder, Search, StarBorder, ViewModule } from "@mui/icons-material"
 import useRequestAll from "../components/hooks/useRequestAll"
 import { ItemBoxes } from "../components/ItemBoxes/itemboxes"
-import React, { useEffect, useRef, useState } from "react"
+import React, { createContext, useContext, useEffect, useRef, useState } from "react"
 import { useParams } from "react-router-dom"
 
 import useBoxesView from "../components/hooks/useBoxesView"
 import ObtainedValues from "../interfaces/obtainedValues"
+import ShowDetails from "../components/ItemBoxes/showDetails"
+import useItemMoreDetails from "../components/store/itemMoreDetails"
+import { useShallow } from "zustand/react/shallow"
 
+const valuesGetted: ObtainedValues = {
+    id:0,
+    name:'',
+    drops:[],
+    description:'',
+    category:'',
+    image:'',
+    state:false
+  }
 
 export const ItemsPage = () =>{
     const params = useParams()
@@ -21,8 +33,8 @@ export const ItemsPage = () =>{
     const [maxPage, setMaxPage] = useState<number>()
     const [indexQuantity, setIndexQuantity] = useState(0)
     const [pageQuantity, setPageQuantity] = useState(50)
-
-
+    const {itemSelected,setMode} = useItemMoreDetails()
+    
     const getItems =  requestAll.data.dataValue && requestAll.data.dataValue.data.filter((element:{category:string}) => element.category != 'monsters')
     const valueSearched = requestAll.data.dataValue && requestAll.data.dataValue.data.filter((element:{name:string,category:string}) => element.name.includes(searchValue) && element.category != 'monsters')
     
@@ -34,6 +46,11 @@ export const ItemsPage = () =>{
             setMaxPage(Math.round(getItems?.length / 50) + 1)
         }
     }, [searchValue,getItems])
+
+    useEffect(() => {
+        setMode('popUp')
+    }, [])
+    
 
     const nextPage = () =>{
         setItemPages(itemPages + 1)
@@ -69,9 +86,11 @@ export const ItemsPage = () =>{
     }
     return(
         <>
-   
-        <NavBar props={'side'}/>
+        {/* Item Details */}
+         <ShowDetails itemSelected={itemSelected}/> 
+        
 
+        <NavBar props={'side'}/>
         {/* Top Bar Search */}
         <Box position={'relative'} sx={{float:'right'}} right={'0'} width={'94%'} border={'solid'}>
         <Box marginTop={'10px'} display={'flex'} flexDirection={'row'}>

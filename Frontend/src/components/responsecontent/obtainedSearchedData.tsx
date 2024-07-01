@@ -2,20 +2,25 @@ import { Box, Button, Typography } from "@mui/material";
 import React, { Dispatch, SetStateAction } from "react";
 import { useRequestOne } from "../hooks/useRequestOne";
 import ObtainedValues from "../../interfaces/obtainedValues"; 
+import useItemMoreDetails from "../store/itemMoreDetails";
 
 
 const ObtainedSearchedData = (props:{dataObtained:ObtainedValues, setInputValue?:React.Dispatch<SetStateAction<string>>}) => {
+  const {mode} = useItemMoreDetails()
+  
+  console.log(mode)
 
-  return (
+  return ( 
     <>
       {/* Outer Content */}
       <Box
-        sx={{ backgroundColor: "rgb(255, 255, 255, 0.8)" }}
+        sx={{ backgroundColor: "rgb(255, 255, 255, 1)" }}
         position={"relative"}
         width={"60%"}
         height={"65%"}
         borderRadius={"10px"}
         border={"solid white"}
+        zIndex={'1'}
       >
         {/* Top left content */}
         <Box

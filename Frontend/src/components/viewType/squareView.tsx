@@ -6,7 +6,6 @@ import ObtainedValues from "../../interfaces/obtainedValues"
 export const SquareView = (props:{element:ObtainedValues}) =>{
 
     const element = props.element
-
     const allTagOptions = () =>{
         if(props.element.category == 'monsters'){
             return 'red'
