@@ -10,12 +10,13 @@ const ObtainedSearchedData = (props:{dataObtained:ObtainedValues, setInputValue?
     <>
       {/* Outer Content */}
       <Box
-        sx={{ backgroundColor: "rgb(255, 255, 255, 0.8)" }}
+        sx={{ backgroundColor: "rgb(255, 255, 255, 1)" }}
         position={"relative"}
         width={"60%"}
         height={"65%"}
         borderRadius={"10px"}
         border={"solid white"}
+        zIndex={'1'}
       >
         {/* Top left content */}
         <Box

@@ -3,17 +3,17 @@ import { SquareView } from "../viewType/squareView"
 import { LineView } from "../viewType/lineView"
 import ObtainedValues from "../../interfaces/obtainedValues"
 
-export const ItemBoxes = (props:{viewSelector:string, element:ObtainedValues}) =>{
+export const ItemBoxes = (props:{viewSelector:string, element:ObtainedValues,setMoreOptionsItemSelectedValue:React.Dispatch<React.SetStateAction<ObtainedValues>>}) =>{
     const element = props.element
-    
+    const setMoreOptionsItemSelectedValue = props.setMoreOptionsItemSelectedValue
     return props.viewSelector == 'square' ?
     <Box>
-        <SquareView {...{element}}/>
+        <SquareView {...{element,setMoreOptionsItemSelectedValue}}/>
     </Box>
     :
     props.viewSelector == 'line' ?
     
-    <LineView {...{element}}/>
+    <LineView {...{element,setMoreOptionsItemSelectedValue}}/>
 
     :
     ''
