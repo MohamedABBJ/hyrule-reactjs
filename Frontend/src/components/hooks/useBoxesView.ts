@@ -1,7 +1,7 @@
 import { useRef, useState } from "react"
 
 const useBoxesView = () =>{
-    const [viewSelector, setViewSelector] = useState(<string>(''))
+    const [viewSelector, setViewSelector] = useState(<string>('square'))
     const squareView : boolean = viewSelector == 'square'
     const lineView : boolean = viewSelector == 'line'
 

@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom"
 
 import useBoxesView from "../components/hooks/useBoxesView"
 import ObtainedValues from "../interfaces/obtainedValues"
+import ShowDetails from "../components/ItemBoxes/showDetails"
 
 
 export const ItemsPage = () =>{
@@ -69,9 +70,11 @@ export const ItemsPage = () =>{
     }
     return(
         <>
-   
-        <NavBar props={'side'}/>
+        {/* Item Details */}
+        <ShowDetails/>
+        
 
+        <NavBar props={'side'}/>
         {/* Top Bar Search */}
         <Box position={'relative'} sx={{float:'right'}} right={'0'} width={'94%'} border={'solid'}>
         <Box marginTop={'10px'} display={'flex'} flexDirection={'row'}>

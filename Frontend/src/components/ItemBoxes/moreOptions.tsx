@@ -10,6 +10,7 @@ const MoreOptions = (props:{element:ObtainedValues}) =>{
     const [showDetails, setShowDetails] = useState(false)
     const open = Boolean(anchorEl);
     const {dataObtained,setInputValue} = useRequestOne()
+    const [openState, setOpenState] = useState<boolean>(false)
   
     const handleClose = () => {
         setAnchorEl(null);
@@ -36,10 +37,8 @@ const MoreOptions = (props:{element:ObtainedValues}) =>{
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClose}>More details</MenuItem>
-        <MenuItem onClick={handleClose}>Save</MenuItem>
+        <MenuItem onClick={() => (setOpenState(true),setAnchorEl(null))}>More details</MenuItem>
       </Menu>
-      {showDetails ? <ShowDetails element={dataObtained}/> : null}
         </>
     )
 }
