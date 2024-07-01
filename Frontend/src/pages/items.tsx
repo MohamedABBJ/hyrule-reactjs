@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom"
 import useBoxesView from "../components/hooks/useBoxesView"
 import ObtainedValues from "../interfaces/obtainedValues"
 import ShowDetails from "../components/ItemBoxes/showDetails"
-import useItemMoreDetails from "../components/hooks/useItemMoreDetails"
+import useItemMoreDetails from "../components/store/itemMoreDetails"
 import { useShallow } from "zustand/react/shallow"
 
 const valuesGetted: ObtainedValues = {
@@ -33,12 +33,8 @@ export const ItemsPage = () =>{
     const [maxPage, setMaxPage] = useState<number>()
     const [indexQuantity, setIndexQuantity] = useState(0)
     const [pageQuantity, setPageQuantity] = useState(50)
-    const {itemSelected} = useItemMoreDetails()
-
-    console.log(itemSelected)
+    const {itemSelected,setMode} = useItemMoreDetails()
     
-    
-
     const getItems =  requestAll.data.dataValue && requestAll.data.dataValue.data.filter((element:{category:string}) => element.category != 'monsters')
     const valueSearched = requestAll.data.dataValue && requestAll.data.dataValue.data.filter((element:{name:string,category:string}) => element.name.includes(searchValue) && element.category != 'monsters')
     
@@ -50,6 +46,11 @@ export const ItemsPage = () =>{
             setMaxPage(Math.round(getItems?.length / 50) + 1)
         }
     }, [searchValue,getItems])
+
+    useEffect(() => {
+        setMode('popUp')
+    }, [])
+    
 
     const nextPage = () =>{
         setItemPages(itemPages + 1)

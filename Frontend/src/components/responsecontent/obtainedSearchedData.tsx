@@ -2,11 +2,15 @@ import { Box, Button, Typography } from "@mui/material";
 import React, { Dispatch, SetStateAction } from "react";
 import { useRequestOne } from "../hooks/useRequestOne";
 import ObtainedValues from "../../interfaces/obtainedValues"; 
+import useItemMoreDetails from "../store/itemMoreDetails";
 
 
 const ObtainedSearchedData = (props:{dataObtained:ObtainedValues, setInputValue?:React.Dispatch<SetStateAction<string>>}) => {
+  const {mode} = useItemMoreDetails()
+  
+  console.log(mode)
 
-  return (
+  return ( 
     <>
       {/* Outer Content */}
       <Box

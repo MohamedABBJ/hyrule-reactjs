@@ -3,9 +3,17 @@ import ObtainedSearchedData from "../components/responsecontent/obtainedSearched
 import { useRequestOne } from "../components/hooks/useRequestOne"
 import NavBar from "../components/navbar/navbar"
 import SearchBar from "../components/searchbar/searchbar"
+import useItemMoreDetails from "../components/store/itemMoreDetails"
+import { useEffect } from "react"
 
 const HomePage = () =>{
     const {dataObtained,setInputValue} = useRequestOne()
+    const {setMode} = useItemMoreDetails()
+
+    useEffect(() => {
+        setMode('sticky')
+    }, [])
+    
 
     return( 
         <>

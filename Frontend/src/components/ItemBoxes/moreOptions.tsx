@@ -4,7 +4,7 @@ import React, { useContext, useState } from "react";
 import ShowDetails from "./showDetails";
 import { useRequestOne } from "../hooks/useRequestOne";
 import ObtainedValues from "../../interfaces/obtainedValues";
-import useItemMoreDetails from "../hooks/useItemMoreDetails";
+import useItemMoreDetails from "../store/itemMoreDetails";
 
 
 const MoreOptions = (props:{element:ObtainedValues}) =>{
